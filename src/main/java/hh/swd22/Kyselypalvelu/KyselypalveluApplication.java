@@ -11,4 +11,5 @@ public class KyselypalveluApplication {
 	}
 // Sam on paras
 // Jaakko
+// pliis toimi t Helmi
 }
