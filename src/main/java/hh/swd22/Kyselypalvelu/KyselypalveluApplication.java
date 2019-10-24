@@ -10,4 +10,6 @@ public class KyselypalveluApplication {
 		SpringApplication.run(KyselypalveluApplication.class, args);
 	}
 // Sam on paras
+// Jaakko
+// pliis toimi t Helmi
 }
