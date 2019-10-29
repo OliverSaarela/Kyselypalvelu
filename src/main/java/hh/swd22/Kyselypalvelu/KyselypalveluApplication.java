@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import hh.swd22.Kyselypalvelu.domain.Answer;
 import hh.swd22.Kyselypalvelu.domain.AnswerRepository;
 import hh.swd22.Kyselypalvelu.domain.Form;
@@ -47,7 +46,20 @@ public class KyselypalveluApplication {
 			 * log.info(answer);
 			 */
 			// }
+			
+			
+	
 		};
+		
+/*public CommandLineRunner runner(FormRepository fRepo) {
+				return (args) -> {
+					log.info("");
+					fRepo.save(new Form());
+					
+				log.info("");
+					for (Form form : fRepo.findAll()) {
+						log.info(form.toString());
+					}*/
 
 	};
 
