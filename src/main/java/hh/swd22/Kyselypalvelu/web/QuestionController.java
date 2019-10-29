@@ -34,7 +34,7 @@ public class QuestionController {
 		return (List <Form>) fRepo.findAll();
 	}
 	
-	@RequestMapping(value = "/saveforms", method = RequestMethod.POST) // Tallennetaan formi
+	@RequestMapping(value = "/saveform", method = RequestMethod.POST) // Tallennetaan formi
 	public @ResponseBody Form SaveFormREST(@RequestBody Form form) {
 	
 		 return fRepo.save(form);
@@ -50,6 +50,13 @@ public class QuestionController {
 		return (List <Question>) qRepo.findAll();
 	}
 	
+	@RequestMapping(value = "/savequestion", method = RequestMethod.POST) // Tallennetaan kys
+	public @ResponseBody Question SaveQuestinREST(@RequestBody Question question) {
+	
+		 return qRepo.save(question);
+		
+	}
+	
 	
 	
 	
@@ -57,6 +64,13 @@ public class QuestionController {
 	@RequestMapping (value="/answers", method =RequestMethod.GET) // Haetaan kaikki vastaukset
 	public @ResponseBody List <Answer> AnswerslistREST(){
 		return (List <Answer>) aRepo.findAll();
+	}
+	
+	@RequestMapping(value = "/saveanswer", method = RequestMethod.POST) // Tallennetaan vastaus
+	public @ResponseBody Answer SaveQuestinREST(@RequestBody Answer answer) {
+	
+		 return aRepo.save(answer);
+		
 	}
 	
 	
