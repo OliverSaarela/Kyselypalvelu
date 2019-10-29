@@ -11,17 +11,22 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Form {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long formId;
 	private String formName;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "form")
 	private List<Question> questions;
 
 	public Form() {
 		super();
+	}
+
+	public Form(String formName) {
+		super();
+		this.formName = formName;
 	}
 
 	public Form(String formName, List<Question> questions) {
@@ -58,7 +63,5 @@ public class Form {
 	public String toString() {
 		return "Form [formId=" + formId + ", formName=" + formName + "]";
 	}
-	
-	
-	
+
 }
