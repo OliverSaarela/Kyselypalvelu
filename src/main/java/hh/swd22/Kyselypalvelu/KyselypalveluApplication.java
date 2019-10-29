@@ -54,6 +54,8 @@ public class KyselypalveluApplication {
 /*
  * HELMERIN JA SAMMYN ALUE!!
  * 
+ * JEE
+ * 
  * public CommandLineRunner runner(FormRepository fRepo) {
 				return (args) -> {
 					log.info("");
