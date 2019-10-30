@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
@@ -19,61 +17,48 @@ import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
 @Controller
 public class QuestionController {
 
-	@Autowired 
+	@Autowired
 	private FormRepository fRepo;
-	
+
 	@Autowired
 	private QuestionRepository qRepo;
-	
+
 	@Autowired
 	private AnswerRepository aRepo;
-	
-	
-	
-	@RequestMapping (value="/forms", method =RequestMethod.GET) // Haetaan kaikki listat
-	public @ResponseBody List <Form> FormlistREST(){
-		return (List <Form>) fRepo.findAll();
+
+	// Kaikki REST-metodit alkaa
+	@GetMapping(value = "/forms") // Haetaan kaikki formit REST-metodi
+	public @ResponseBody List<Form> FormlistREST() {
+		return (List<Form>) fRepo.findAll();
 	}
-	
-	@RequestMapping(value = "/saveform", method = RequestMethod.POST) // Tallennetaan formi
-	public @ResponseBody Form SaveFormREST(@RequestBody Form form) {
-	
-		 return fRepo.save(form);
-		
+
+	@GetMapping(value = "/questions") // Haetaan kaikki kysymykset REST-metodi
+	public @ResponseBody List<Question> QuestionlistREST() {
+		return (List<Question>) qRepo.findAll();
 	}
-	
-	
-	
-	
-	
-	@RequestMapping (value="/questions", method =RequestMethod.GET) // Haetaan kaikki kys
-	public @ResponseBody List <Question> QuestionlistREST(){
-		return (List <Question>) qRepo.findAll();
+
+	@GetMapping(value = "/answers") // Haetaan kaikki vastaukset REST-metodi
+	public @ResponseBody List<Answer> AnswerslistREST() {
+		return (List<Answer>) aRepo.findAll();
 	}
+	// Kaikki REST-metodit päättyy
+
+	// TODO Hakee formit tietokannasta getForms() "/form"
 	
-	@RequestMapping(value = "/savequestion", method = RequestMethod.POST) // Tallennetaan kys
-	public @ResponseBody Question SaveQuestinREST(@RequestBody Question question) {
+	// TODO Hakee kysymykset tietokannasta getQuestions() "/question"
 	
-		 return qRepo.save(question);
-		
-	}
+	// TODO Hakee vastaukset tietokannasta getAnswers()
 	
+	// TODO Tekee tyhjän formin addNewForm() "/addform"
 	
+	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
 	
+	// TODO Tekee tyhjän vastauksen addNewAnswer()
 	
+	// TODO Tallena formi tietokantaan saveForm() "/saveform"
 	
-	@RequestMapping (value="/answers", method =RequestMethod.GET) // Haetaan kaikki vastaukset
-	public @ResponseBody List <Answer> AnswerslistREST(){
-		return (List <Answer>) aRepo.findAll();
-	}
+	// TODO Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
 	
-	@RequestMapping(value = "/saveanswer", method = RequestMethod.POST) // Tallennetaan vastaus
-	public @ResponseBody Answer SaveQuestinREST(@RequestBody Answer answer) {
-	
-		 return aRepo.save(answer);
-		
-	}
-	
-	
-	
+	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
+
 }
