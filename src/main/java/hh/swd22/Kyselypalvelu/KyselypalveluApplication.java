@@ -51,20 +51,7 @@ public class KyselypalveluApplication {
 	
 		};
 		
-/*
- * HELMERIN JA SAMMYN ALUE!!
- * 
- * JEE
- * 
- * public CommandLineRunner runner(FormRepository fRepo) {
-				return (args) -> {
-					log.info("");
-					fRepo.save(new Form());
-					
-				log.info("");
-					for (Form form : fRepo.findAll()) {
-						log.info(form.toString());
-					}*/
+
 
 	};
 
