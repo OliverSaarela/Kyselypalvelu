@@ -75,12 +75,15 @@ public class QuestionController {
 	}
 
 	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
-	@GetMapping("/addquestion/{formId}")
-	public String addNewQuestion(@PathVariable("formId") Long formId, Model model) {
-		model.addAttribute("form", fRepo.findById(formId));
+	@GetMapping("/addquestion")
+	public String addNewQuestion(Model model) {
 		model.addAttribute("question", new Question());
+		model.addAttribute("form", fRepo.findAll());
 		return "addquestion";
 	}
+	
+
+	
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
 
 	// TODO Tallena formi tietokantaan saveForm() "/saveform"
@@ -97,7 +100,7 @@ public class QuestionController {
 	public String saveQuestion(@ModelAttribute Question question) {
 
 		qRepo.save(question);
-		return "redirect:../questions";
+		return "redirect:../forms";
 	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 

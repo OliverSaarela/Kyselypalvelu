@@ -10,13 +10,16 @@
 
 <h2>Add new question</h2>
 
-	<form action="#" th:action="@{questions}"  th:object= ${question} method="post">
-	<input type="hidden" th:field={form.formId}/>
+	<form action="#" th:action="@{addquestion}"  th:object= ${question} method="post">
+	<label>Form: </label><select th:field="*{form}">
+		<option th:each="form: ${forms}" th:value="${form.formId}" th:text="${form.formName}"></option>
+	</select>
 
 	<label>Question: </label><input type="text" th:field="${question.question}" />
 
 
 	<input type="submit" value="Submit" class="btn btn-success" />
+	<button href="/forms">Return</button>
 	</form>
 
 
