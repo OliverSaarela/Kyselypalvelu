@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
@@ -57,6 +61,11 @@ public class QuestionController {
 	// TODO Hakee vastaukset tietokannasta getAnswers()
 
 	// TODO Tekee tyhjän formin addNewForm() "/addform"
+	@PostMapping("/addform")
+	public String saveform(@ModelAttribute Form form) {
+
+		fRepo.save(form);
+		return "redirect:/forms";
 
 	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
 
