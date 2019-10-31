@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,38 +28,44 @@ public class QuestionController {
 	private AnswerRepository aRepo;
 
 	// Kaikki REST-metodit alkaa
-	@GetMapping(value = "/forms") // Haetaan kaikki formit REST-metodi
+	@GetMapping("/restforms") // Haetaan kaikki formit REST-metodi
 	public @ResponseBody List<Form> FormlistREST() {
 		return (List<Form>) fRepo.findAll();
 	}
 
-	@GetMapping(value = "/questions") // Haetaan kaikki kysymykset REST-metodi
+	@GetMapping("/restquestions") // Haetaan kaikki kysymykset REST-metodi
 	public @ResponseBody List<Question> QuestionlistREST() {
 		return (List<Question>) qRepo.findAll();
 	}
 
-	@GetMapping(value = "/answers") // Haetaan kaikki vastaukset REST-metodi
+	@GetMapping("/restanswers") // Haetaan kaikki vastaukset REST-metodi
 	public @ResponseBody List<Answer> AnswerslistREST() {
 		return (List<Answer>) aRepo.findAll();
 	}
 	// Kaikki REST-metodit päättyy
 
-	// TODO Hakee formit tietokannasta getForms() "/form"
-	
-	// TODO Hakee kysymykset tietokannasta getQuestions() "/question"
-	
+	// TODO Hakee formit tietokannasta getForms() "/forms"
+	@GetMapping("/forms")
+	public String getForms(Model model) {
+		List<Form> forms = (List<Form>) fRepo.findAll();
+		model.addAttribute("forms", forms);
+		return "forms";
+	}
+
+	// TODO Hakee kysymykset tietokannasta getQuestions() "/forms/{formId}"
+
 	// TODO Hakee vastaukset tietokannasta getAnswers()
-	
+
 	// TODO Tekee tyhjän formin addNewForm() "/addform"
-	
+
 	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
-	
+
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
-	
+
 	// TODO Tallena formi tietokantaan saveForm() "/saveform"
-	
+
 	// TODO Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
-	
+
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 
 }

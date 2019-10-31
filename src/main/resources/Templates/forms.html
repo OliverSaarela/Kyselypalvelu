@@ -1,24 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Forms</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Forms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
-<h1>Forms</h1>
+	<h1>Forms</h1>
 
-<table>
-<tr>
-<th></th>
-</tr>
+	<table>
+		<tr>
+			<th>Forms</th>
+		</tr>
 
-<tr th:each="form : ${forms}">
-	<td th:text=${form.Form}></td>
-	<td></td>
-</tr>
+		<tr th:each="form : ${forms}">
+			<td th:text=${form.formName}></td>
+			<td></td>
+		</tr>
 
-</table>
+	</table>
 
 </body>
 </html>
