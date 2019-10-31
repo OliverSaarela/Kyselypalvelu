@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+<title>Add new question</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>Add new question</h2>
+
+	<form action="#" th:action="@{questions}"  th:object= ${question} method="post">
+	<input type="hidden" th:field={form.formId}/>
+
+	<label>Question: </label><input type="text" th:field="${question.question}" />
+
+
+	<input type="submit" value="Submit" class="btn btn-success" />
+	</form>
+
+
+</body>
+</html>

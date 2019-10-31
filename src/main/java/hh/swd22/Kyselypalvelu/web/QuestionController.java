@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -45,7 +46,6 @@ public class QuestionController {
 		return (List<Answer>) aRepo.findAll();
 	}
 
-
 	// Kaikki REST-metodit päättyy
 
 	// TODO Hakee formit tietokannasta getForms() "/forms"
@@ -55,7 +55,7 @@ public class QuestionController {
 		model.addAttribute("forms", forms);
 		return "forms";
 	}
-	
+
 	// TODO Hakee kysymykset tietokannasta getQuestions() "/forms/{formId}"
 	@GetMapping("/forms/{formId}")
 	public String getQuestions(Model model) {
@@ -64,27 +64,28 @@ public class QuestionController {
 		return "questions";
 	}
 
-
-
 	// TODO Hakee vastaukset tietokannasta getAnswers()
 
 	// TODO Tekee tyhjän formin addNewForm() "/addform"
 
-	@GetMapping(value = "/addform")
+	@GetMapping("/addform")
 	public String addNewForm(Model model) {
 		model.addAttribute("form", new Form());
 		return "addform";
 	}
 
-
-
 	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
-
+	@GetMapping("/addquestion/{formId}")
+	public String addNewQuestion(@PathVariable("formId") Long formId, Model model) {
+		model.addAttribute("form", fRepo.findById(formId));
+		model.addAttribute("question", new Question());
+		return "addquestion";
+	}
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
 
 	// TODO Tallena formi tietokantaan saveForm() "/saveform"
 
-	@PostMapping(value = "/addform")
+	@PostMapping("/addform")
 	public String saveForm(@ModelAttribute Form form) {
 
 		fRepo.save(form);
@@ -92,7 +93,12 @@ public class QuestionController {
 	}
 
 	// TODO Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
+	@PostMapping("/addquestion")
+	public String saveQuestion(@ModelAttribute Question question) {
 
+		qRepo.save(question);
+		return "redirect:../questions";
+	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 
 }
