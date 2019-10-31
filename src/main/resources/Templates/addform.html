@@ -1,20 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
 <head>
-    <title>Book form</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Add new form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Kirja</h1>
-	<form action="#" th:action="@{/newbook}"  th:object= ${book} method="post">
-	
-	<p>title: <input type="text" th:field="${book.title}" /></p>
-	<p>author: <input type="text" th:field="${book.author}" /></p>
-	<p>year: <input type="text" th:field="${book.year}" /></p>
-	<p>price: <input type="text" th:field="${book.price}" /></p>
-	<p>isbn: <input type="text" th:field="${book.isbn}" /></p>
-	<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+
+<h2>Add new form</h2>
+
+	<form action="#" th:action="@{addform}"  th:object= ${form} method="post">
+
+	<label>Form name: </label><input type="text" th:field="${form.formName}" />
+
+
+	<input type="submit" value="Submit" class="btn btn-success" />
 	</form>
-    
+
+
 </body>
 </html>
