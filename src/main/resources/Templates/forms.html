@@ -17,7 +17,7 @@
 
 <tr th:each="form : ${forms}">
 	<td th:text=${form.formName}></td>
-	<td></td>
+	<td><a th:href="@{/forms/{id}(id=${form.formId})}">Show from</a></td>
 </tr>
 
 </table>
