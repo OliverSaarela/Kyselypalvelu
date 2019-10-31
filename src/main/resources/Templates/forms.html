@@ -1,24 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Forms</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Forms</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
-	<h1>Forms</h1>
+<h1>Forms</h1>
 
-	<table>
-		<tr>
-			<th>Forms</th>
-		</tr>
+<a href="/addform" class="btn btn-success" style="padding: 20px">Add new form</a>
 
-		<tr th:each="form : ${forms}">
-			<td th:text=${form.formName}></td>
-			<td></td>
-		</tr>
+<table style="padding:20px">
+<tr>
+<th>Forms</th>
+</tr>
 
-	</table>
+<tr th:each="form : ${forms}">
+	<td th:text=${form.formName}></td>
+	<td><a th:href="@{/forms/{id}(id=${form.formId})}">Show from</a></td>
+</tr>
+
+</table>
 
 </body>
 </html>
