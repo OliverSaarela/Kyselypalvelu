@@ -55,8 +55,16 @@ public class QuestionController {
 		model.addAttribute("forms", forms);
 		return "forms";
 	}
-
+	
 	// TODO Hakee kysymykset tietokannasta getQuestions() "/forms/{formId}"
+	@GetMapping("/forms/{formId}")
+	public String getQuestions(Model model) {
+		List<Question> questions = (List<Question>) qRepo.findAll();
+		model.addAttribute("questions", questions);
+		return "questions";
+	}
+
+
 
 	// TODO Hakee vastaukset tietokannasta getAnswers()
 
