@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+<title>Add new form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>Add new form</h2>
+
+	<form action="#" th:action="@{addform}"  th:object= ${form} method="post">
+	
+	<label>Form name: </label><input type="text" th:field="${form.formName}" />
+	
+
+	<input type="submit" value="Submit" class="btn btn-success" /> 
+	</form>
+
+	
+</body>
+</html>
