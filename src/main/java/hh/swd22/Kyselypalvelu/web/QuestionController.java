@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
@@ -27,38 +31,69 @@ public class QuestionController {
 	private AnswerRepository aRepo;
 
 	// Kaikki REST-metodit alkaa
-	@GetMapping(value = "/forms") // Haetaan kaikki formit REST-metodi
+	@GetMapping("/restforms") // Haetaan kaikki formit REST-metodi
 	public @ResponseBody List<Form> FormlistREST() {
 		return (List<Form>) fRepo.findAll();
 	}
 
-	@GetMapping(value = "/questions") // Haetaan kaikki kysymykset REST-metodi
+	@GetMapping("/restquestions") // Haetaan kaikki kysymykset REST-metodi
 	public @ResponseBody List<Question> QuestionlistREST() {
 		return (List<Question>) qRepo.findAll();
 	}
 
-	@GetMapping(value = "/answers") // Haetaan kaikki vastaukset REST-metodi
+	@GetMapping("/restanswers") // Haetaan kaikki vastaukset REST-metodi
 	public @ResponseBody List<Answer> AnswerslistREST() {
 		return (List<Answer>) aRepo.findAll();
 	}
+
 	// Kaikki REST-metodit päättyy
 
-	// TODO Hakee formit tietokannasta getForms() "/form"
-	
-	// TODO Hakee kysymykset tietokannasta getQuestions() "/question"
-	
+	// Hakee formit tietokannasta getForms() "/forms"
+	@GetMapping("/forms")
+	public String getForms(Model model) {
+		model.addAttribute("forms", fRepo.findAll());
+		return "forms";
+	}
+
+	// Hakee kysymykset tietokannasta getQuestions() "/forms/{formName}"
+	@GetMapping("/forms/{formName}")
+	public String getQuestions(@PathVariable("formName") Form formName, Model model) {
+		model.addAttribute("questions", qRepo.findByForm(formName));
+		return "questions";
+	}
+
 	// TODO Hakee vastaukset tietokannasta getAnswers()
-	
-	// TODO Tekee tyhjän formin addNewForm() "/addform"
-	
-	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
-	
+
+	// Tekee tyhjän formin addNewForm() "/addform"
+	@GetMapping("/addform")
+	public String addNewForm(Model model) {
+		model.addAttribute("form", new Form());
+		return "addform";
+	}
+
+	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
+	@GetMapping("/addquestion")
+	public String addNewQuestion(Model model) {
+		model.addAttribute("question", new Question());
+		model.addAttribute("forms", fRepo.findAll());
+		return "addquestion";
+	}
+
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
-	
-	// TODO Tallena formi tietokantaan saveForm() "/saveform"
-	
-	// TODO Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
-	
+
+	// Tallena formi tietokantaan saveForm() "/saveform"
+	@PostMapping("/addform")
+	public String saveForm(@ModelAttribute Form form) {
+		fRepo.save(form);
+		return "redirect:/forms";
+	}
+
+	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
+	@PostMapping("/savequestion")
+	public String saveQuestion(@ModelAttribute Question question) {
+		qRepo.save(question);
+		return "redirect:/forms";
+	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 
 }

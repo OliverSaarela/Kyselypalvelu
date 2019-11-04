@@ -20,9 +20,9 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long questionId;
-	private String question;
+	private String questionName;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "questionName")
 	private List<Answer> answers;
 
 	@ManyToOne
@@ -36,7 +36,7 @@ public class Question {
 
 	public Question(String question, Form form) {
 		super();
-		this.question = question;
+		this.questionName = question;
 		this.form = form;
 	}
 
@@ -44,8 +44,8 @@ public class Question {
 		return questionId;
 	}
 
-	public String getQuestion() {
-		return question;
+	public String getQuestionName() {
+		return questionName;
 	}
 
 	public List<Answer> getAnswers() {
@@ -60,8 +60,8 @@ public class Question {
 		this.questionId = questionId;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setQuestionName(String question) {
+		this.questionName = question;
 	}
 
 	public void setAnswers(List<Answer> answers) {
@@ -75,10 +75,10 @@ public class Question {
 	@Override
 	public String toString() {
 		if (this.form != null) {
-			return "Question [questionId=" + questionId + ", question=" + question + ", form="
+			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", form="
 					+ this.getForm() + "]";
 		} else {
-			return "Question [questionId=" + questionId + ", question=" + question + "]";
+			return "Question [questionId=" + questionId + ", questionName=" + questionName + "]";
 		}
 	}
 

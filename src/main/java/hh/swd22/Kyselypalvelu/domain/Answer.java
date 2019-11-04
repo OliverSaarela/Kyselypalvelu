@@ -21,7 +21,7 @@ public class Answer {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "questionId")
-	private Question question;
+	private Question questionName;
 
 	public Answer() {
 		super();
@@ -30,7 +30,7 @@ public class Answer {
 	public Answer(String txtAnswer, Question question) {
 		super();
 		this.txtAnswer = txtAnswer;
-		this.question = question;
+		this.questionName = question;
 	}
 
 	public Long getAnswerId() {
@@ -41,8 +41,8 @@ public class Answer {
 		return txtAnswer;
 	}
 
-	public Question getQuestion() {
-		return question;
+	public Question getQuestionName() {
+		return questionName;
 	}
 
 	public void setAnswerId(Long answerId) {
@@ -53,14 +53,14 @@ public class Answer {
 		this.txtAnswer = txtAnswer;
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
+	public void setQuestionName(Question question) {
+		this.questionName = question;
 	}
 
 	@Override
 	public String toString() {
-		if (this.question != null) {
-			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", question=" + this.getQuestion() + "]";
+		if (this.questionName != null) {
+			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", questionName=" + this.getQuestionName() + "]";
 		}
 		else {
 			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + "]";

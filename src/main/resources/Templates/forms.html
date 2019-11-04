@@ -8,14 +8,16 @@
 
 <h1>Forms</h1>
 
-<table>
+<a href="/addform" class="btn btn-success" style="padding: 20px">Add new form</a>
+
+<table style="padding:20px">
 <tr>
-<th></th>
+<th>Forms</th>
 </tr>
 
 <tr th:each="form : ${forms}">
-	<td th:text=${form.Form}></td>
-	<td></td>
+	<td th:text=${form.formName}></td>
+	<td><a th:href="@{/forms/{id}(id=${form.formId})}">Show from</a></td>
 </tr>
 
 </table>
