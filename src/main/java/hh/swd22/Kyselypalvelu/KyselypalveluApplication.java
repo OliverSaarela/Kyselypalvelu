@@ -29,6 +29,7 @@ public class KyselypalveluApplication {
 			log.info("Testi");
 
 			fRepo.save(new Form("Testikysely"));
+			fRepo.save(new Form("Testikysely 2"));
 
 			qRepo.save(new Question("Minkä vuoden opiskelija olet?", fRepo.findByFormName("Testikysely").get(0)));
 			qRepo.save(new Question("Oletko käyttänyt Haaga-Helian kansainvälisyyspalveluita?",
@@ -39,6 +40,8 @@ public class KyselypalveluApplication {
 					fRepo.findByFormName("Testikysely").get(0)));
 			qRepo.save(new Question("Oletko ollut yhteydessä Haaga-Helian kansainvälisyystoimistoon?",
 					fRepo.findByFormName("Testikysely").get(0)));
+			
+			qRepo.save(new Question("Mitä?", fRepo.findByFormName("Testikysely 2").get(0)));
 
 			aRepo.save(new Answer("2019", qRepo.findByQuestion("Minkä vuoden opiskelija olet?").get(0)));
 

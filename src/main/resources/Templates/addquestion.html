@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
 
 <head>
 <title>Add new question</title>
@@ -8,18 +9,16 @@
 </head>
 <body>
 
-<h2>Add new question</h2>
+	<h2>Add new question</h2>
 
-	<form action="#" th:action="@{addquestion}"  th:object= ${question} method="post">
-	<label>Form: </label><select th:field="*{form}">
-		<option th:each="form: ${forms}" th:value="${form.formId}" th:text="${form.formName}"></option>
-	</select>
-
-	<label>Question: </label><input type="text" th:field="${question.question}" />
+	<form action="#" th:action="@{savequestion}" th:object=${question} method="post">
 
 
-	<input type="submit" value="Submit" class="btn btn-success" />
-	<button href="/forms">Return</button>
+		<label>Question: </label><input type="text" th:field="${question.question}" /> 
+		<label>Form: </label><select th:field="*{form}">
+			<option th:each="form: ${form}" th:value="${form.formId}" th:text="${form.formName}"></option>
+		</select> <input type="submit" value="Submit" class="btn btn-success" />
+		<button href="/forms">Return</button>
 	</form>
 
 
