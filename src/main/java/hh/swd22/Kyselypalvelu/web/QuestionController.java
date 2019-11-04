@@ -82,7 +82,7 @@ public class QuestionController {
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
 
 	// Tallena formi tietokantaan saveForm() "/saveform"
-	@PostMapping("/addform")
+	@PostMapping("/saveform")
 	public String saveForm(@ModelAttribute Form form) {
 		fRepo.save(form);
 		return "redirect:/forms";
