@@ -10,14 +10,15 @@
 
 <h2>Add new form</h2>
 
-	<form action="#" th:action="@{addform}"  th:object= ${form} method="post">
+	<form action="#" th:action="@{saveform}"  th:object= ${form} method="post">
 
 	<label>Form name: </label><input type="text" th:field="${form.formName}" />
 
 
 	<input type="submit" value="Submit" class="btn btn-success" />
-	<button href="/forms">Return</button>
 	</form>
+	
+	<button onClick="history.go(-1)">Return</button>
 
 
 </body>
