@@ -75,7 +75,7 @@ public class QuestionController {
 	@GetMapping("/addquestion")
 	public String addNewQuestion(Model model) {
 		model.addAttribute("question", new Question());
-		model.addAttribute("form", fRepo.findAll());
+		model.addAttribute("forms", fRepo.findAll());
 		return "addquestion";
 	}
 
@@ -84,7 +84,6 @@ public class QuestionController {
 	// Tallena formi tietokantaan saveForm() "/saveform"
 	@PostMapping("/addform")
 	public String saveForm(@ModelAttribute Form form) {
-
 		fRepo.save(form);
 		return "redirect:/forms";
 	}
@@ -92,7 +91,6 @@ public class QuestionController {
 	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
 	@PostMapping("/savequestion")
 	public String saveQuestion(@ModelAttribute Question question) {
-
 		qRepo.save(question);
 		return "redirect:/forms";
 	}

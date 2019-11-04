@@ -43,7 +43,7 @@ public class KyselypalveluApplication {
 			
 			qRepo.save(new Question("Mitä?", fRepo.findByFormName("Testikysely 2").get(0)));
 
-			aRepo.save(new Answer("2019", qRepo.findByQuestion("Minkä vuoden opiskelija olet?").get(0)));
+			aRepo.save(new Answer("2019", qRepo.findByQuestionName("Minkä vuoden opiskelija olet?").get(0)));
 
 			/*
 			 * log.info("Testihaku"); for (Answer answer: aRepo.findAll()) {

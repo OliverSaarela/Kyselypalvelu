@@ -14,10 +14,11 @@
 	<form action="#" th:action="@{savequestion}" th:object=${question} method="post">
 
 
-		<label>Question: </label><input type="text" th:field="${question.question}" /> 
+		<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
 		<label>Form: </label><select th:field="*{form}">
-			<option th:each="form: ${form}" th:value="${form.formId}" th:text="${form.formName}"></option>
-		</select> <input type="submit" value="Submit" class="btn btn-success" />
+			<option th:each="form: ${forms}" th:value="${form.formId}" th:text="${form.formName}"></option>
+		</select> 
+		<input type="submit" value="Submit" class="btn btn-success" />
 		<button href="/forms">Return</button>
 	</form>
 
