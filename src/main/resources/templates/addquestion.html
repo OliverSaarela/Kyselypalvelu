@@ -18,9 +18,10 @@
 		<label>Form: </label><select th:field="*{form}">
 			<option th:each="form: ${forms}" th:value="${form.formId}" th:text="${form.formName}"></option>
 		</select> 
-		<input type="submit" value="Submit" class="btn btn-success" />
-		<button href="/forms">Return</button>
+		<input type="submit" value="Submit"/>
+		
 	</form>
+	<button onClick="history.go(-1)">Return</button>
 
 
 </body>
