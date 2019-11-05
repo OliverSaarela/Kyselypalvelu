@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -45,54 +46,54 @@ public class QuestionController {
 		return (List<Answer>) aRepo.findAll();
 	}
 
-
 	// Kaikki REST-metodit päättyy
 
-	// TODO Hakee formit tietokannasta getForms() "/forms"
+	// Hakee formit tietokannasta getForms() "/forms"
 	@GetMapping("/forms")
 	public String getForms(Model model) {
-		List<Form> forms = (List<Form>) fRepo.findAll();
-		model.addAttribute("forms", forms);
+		model.addAttribute("forms", fRepo.findAll());
 		return "forms";
 	}
-	
-	// TODO Hakee kysymykset tietokannasta getQuestions() "/forms/{formId}"
-	@GetMapping("/forms/{formId}")
-	public String getQuestions(Model model) {
-		List<Question> questions = (List<Question>) qRepo.findAll();
-		model.addAttribute("questions", questions);
+
+	// Hakee kysymykset tietokannasta getQuestions() "/forms/{formName}"
+	@GetMapping("/forms/{formName}")
+	public String getQuestions(@PathVariable("formName") Form formName, Model model) {
+		model.addAttribute("questions", qRepo.findByForm(formName));
 		return "questions";
 	}
 
-
-
 	// TODO Hakee vastaukset tietokannasta getAnswers()
 
-	// TODO Tekee tyhjän formin addNewForm() "/addform"
-
-	@GetMapping(value = "/addform")
+	// Tekee tyhjän formin addNewForm() "/addform"
+	@GetMapping("/addform")
 	public String addNewForm(Model model) {
 		model.addAttribute("form", new Form());
 		return "addform";
 	}
 
-
-
-	// TODO Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
+	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
+	@GetMapping("/addquestion")
+	public String addNewQuestion(Model model) {
+		model.addAttribute("question", new Question());
+		model.addAttribute("forms", fRepo.findAll());
+		return "addquestion";
+	}
 
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
 
-	// TODO Tallena formi tietokantaan saveForm() "/saveform"
-
-	@PostMapping(value = "/addform")
+	// Tallena formi tietokantaan saveForm() "/saveform"
+	@PostMapping("/saveform")
 	public String saveForm(@ModelAttribute Form form) {
-
 		fRepo.save(form);
 		return "redirect:/forms";
 	}
 
-	// TODO Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
-
+	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
+	@PostMapping("/savequestion")
+	public String saveQuestion(@ModelAttribute Question question) {
+		qRepo.save(question);
+		return "redirect:/forms";
+	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 
 }

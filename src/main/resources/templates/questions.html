@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Forms</title>
@@ -8,19 +8,19 @@
 
 	<h1>Questions</h1>
 	
-		<a href="/forms" >Return back to forms</a>
-		
 	<table>
 		<tr>
 			<th>Questions</th>
 		</tr>
 
 		<tr th:each="question : ${questions}">
-			<td th:text=${question.question}></td>
+			<td th:text=${question.questionName}></td>
 			<td></td>
 		</tr>
 
 	</table>
+	
+	<button onClick="history.go(-1)">Return</button>
 
 </body>
 </html>
