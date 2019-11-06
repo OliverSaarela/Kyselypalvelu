@@ -8,11 +8,12 @@
 </head>
 <body>
 
-<h2>Add new form</h2>
+<h2>Add new survey</h2>
 
-	<form action="#" th:action="@{saveform}"  th:object= ${form} method="post">
+	<form action="#" th:action="@{savesurvey}"  th:object= ${survey} method="post">
 
-	<label>Form name: </label><input type="text" th:field="${form.formName}" />
+	<label>Survey name: </label><input type="text" th:field="${survey.surveyName}" />
+	<label>Survey explanation: </label><input type="text" th:field="${survey.explanation}" />
 
 
 	<input type="submit" value="Submit"/>
