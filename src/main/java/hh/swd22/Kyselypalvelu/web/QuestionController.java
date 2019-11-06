@@ -1,6 +1,7 @@
 package hh.swd22.Kyselypalvelu.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +15,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
 import hh.swd22.Kyselypalvelu.domain.AnswerRepository;
-import hh.swd22.Kyselypalvelu.domain.Form;
-import hh.swd22.Kyselypalvelu.domain.FormRepository;
 import hh.swd22.Kyselypalvelu.domain.Question;
 import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
+import hh.swd22.Kyselypalvelu.domain.Survey;
+import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 
 @CrossOrigin
 @Controller
 public class QuestionController {
 
 	@Autowired
-	private FormRepository fRepo;
+	private SurveyRepository sRepo;
 
 	@Autowired
 	private QuestionRepository qRepo;
@@ -33,68 +34,71 @@ public class QuestionController {
 	private AnswerRepository aRepo;
 
 	// Kaikki REST-metodit alkaa
-	@GetMapping("/restforms") // Haetaan kaikki formit REST-metodi
-	public @ResponseBody List<Form> FormlistREST() {
-		return (List<Form>) fRepo.findAll();
+	// Haetaan kaikki kyselyt REST-metodi
+	@GetMapping("/restsurveys")
+	public @ResponseBody List<Survey> surveyListRest() {
+		return (List<Survey>) sRepo.findAll();
 	}
 
-	@GetMapping("/restquestions") // Haetaan kaikki kysymykset REST-metodi
-	public @ResponseBody List<Question> QuestionlistREST() {
-		return (List<Question>) qRepo.findAll();
+	// Haetaan kaikki kysymykset REST-metodi
+	@GetMapping("/restsurveys/{surveyId}")
+	public @ResponseBody Optional<Survey> questionListREest(@PathVariable("surveyId") Long surveyId) {
+		return sRepo.findById(surveyId);
 	}
 
-	@GetMapping("/restanswers") // Haetaan kaikki vastaukset REST-metodi
-	public @ResponseBody List<Answer> AnswerslistREST() {
+	// Haetaan kaikki vastaukset REST-metodi
+	@GetMapping("/restanswers")
+	public @ResponseBody List<Answer> answersListRest() {
 		return (List<Answer>) aRepo.findAll();
 	}
 
 	// Kaikki REST-metodit päättyy
 
-	// Hakee formit tietokannasta getForms() "/forms"
-	@GetMapping("/forms")
-	public String getForms(Model model) {
-		model.addAttribute("forms", fRepo.findAll());
-		return "forms";
+	// Hakee surveys tietokannasta getSurveys() "/surveys"
+	@GetMapping("/surveys")
+	public String getSurveys(Model model) {
+		model.addAttribute("surveys", sRepo.findAll());
+		return "surveys";
 	}
 
-	// Hakee kysymykset tietokannasta getQuestions() "/forms/{formName}"
-	@GetMapping("/forms/{formName}")
-	public String getQuestions(@PathVariable("formName") Form formName, Model model) {
-		model.addAttribute("questions", qRepo.findByForm(formName));
+	// Hakee kysymykset tietokannasta getQuestions() "/surveys/{surveyName}"
+	@GetMapping("/surveys/{surveyName}")
+	public String getQuestions(@PathVariable("surveyName") Survey surveyName, Model model) {
+		model.addAttribute("questions", qRepo.findBySurvey(surveyName));
 		return "questions";
 	}
 
 	// TODO Hakee vastaukset tietokannasta getAnswers()
 
-	// Tekee tyhjän formin addNewForm() "/addform"
-	@GetMapping("/addform")
-	public String addNewForm(Model model) {
-		model.addAttribute("form", new Form());
-		return "addform";
+	// Tekee tyhjän surveyn addNewSurvey() "/addsurvey"
+	@GetMapping("/addsurvey")
+	public String addNewSurvey(Model model) {
+		model.addAttribute("survey", new Survey());
+		return "addsurvey";
 	}
 
 	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
 	@GetMapping("/addquestion")
 	public String addNewQuestion(Model model) {
 		model.addAttribute("question", new Question());
-		model.addAttribute("forms", fRepo.findAll());
+		model.addAttribute("surveys", sRepo.findAll());
 		return "addquestion";
 	}
 
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
 
-	// Tallena formi tietokantaan saveForm() "/saveform"
-	@PostMapping("/saveform")
-	public String saveForm(@ModelAttribute Form form) {
-		fRepo.save(form);
-		return "redirect:/forms";
+	// Tallena surveyn tietokantaan saveSurvey() "/savesurvey"
+	@PostMapping("/savesurvey")
+	public String saveSurvey(@ModelAttribute Survey survey) {
+		sRepo.save(survey);
+		return "redirect:/surveys";
 	}
 
 	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
 	@PostMapping("/savequestion")
 	public String saveQuestion(@ModelAttribute Question question) {
 		qRepo.save(question);
-		return "redirect:/forms";
+		return "redirect:/surveys";
 	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 

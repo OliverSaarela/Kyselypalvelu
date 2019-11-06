@@ -15,8 +15,8 @@
 
 
 		<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
-		<label>Form: </label><select th:field="*{form}">
-			<option th:each="form: ${forms}" th:value="${form.formId}" th:text="${form.formName}"></option>
+		<label>Survey: </label><select th:field="*{survey}">
+			<option th:each="survey: ${surveys}" th:value="${survey.surveyId}" th:text="${survey.surveyName}"></option>
 		</select> 
 		<input type="submit" value="Submit"/>
 		
