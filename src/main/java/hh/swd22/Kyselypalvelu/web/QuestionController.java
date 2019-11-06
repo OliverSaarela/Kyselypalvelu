@@ -40,7 +40,7 @@ public class QuestionController {
 		return (List<Survey>) sRepo.findAll();
 	}
 
-	// Haetaan kaikki kysymykset REST-metodi
+	// Haetaan yhden kyselyn kysymykset REST-metodi
 	@GetMapping("/restsurveys/{surveyId}")
 	public @ResponseBody Optional<Survey> questionListREest(@PathVariable("surveyId") Long surveyId) {
 		return sRepo.findById(surveyId);
