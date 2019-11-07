@@ -35,19 +35,19 @@ public class QuestionController {
 
 	// Kaikki REST-metodit alkaa
 	// Haetaan kaikki kyselyt REST-metodi
-	@GetMapping("/restsurveys")
+	@GetMapping("/surveys")
 	public @ResponseBody List<Survey> surveyListRest() {
 		return (List<Survey>) sRepo.findAll();
 	}
 
 	// Haetaan yhden kyselyn kysymykset REST-metodi
-	@GetMapping("/restsurveys/{surveyId}")
+	@GetMapping("/surveys/{surveyId}")
 	public @ResponseBody Optional<Survey> questionListREest(@PathVariable("surveyId") Long surveyId) {
 		return sRepo.findById(surveyId);
 	}
 
 	// Haetaan kaikki vastaukset REST-metodi
-	@GetMapping("/restanswers")
+	@GetMapping("/answers")
 	public @ResponseBody List<Answer> answersListRest() {
 		return (List<Answer>) aRepo.findAll();
 	}
@@ -55,14 +55,14 @@ public class QuestionController {
 	// Kaikki REST-metodit päättyy
 
 	// Hakee surveys tietokannasta getSurveys() "/surveys"
-	@GetMapping("/surveys")
+	@GetMapping("/survey")
 	public String getSurveys(Model model) {
 		model.addAttribute("surveys", sRepo.findAll());
 		return "surveys";
 	}
 
-	// Hakee kysymykset tietokannasta getQuestions() "/surveys/{surveyName}"
-	@GetMapping("/surveys/{surveyName}")
+	// Hakee kysymykset tietokannasta getQuestions() "/survey/{surveyName}"
+	@GetMapping("/survey/{surveyName}")
 	public String getQuestions(@PathVariable("surveyName") Survey surveyName, Model model) {
 		model.addAttribute("questions", qRepo.findBySurvey(surveyName));
 		return "questions";
