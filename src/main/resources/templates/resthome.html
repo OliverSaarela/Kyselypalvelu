@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>REST Home Page</title>
+</head>
+<body>
+<h1>REST Home Page</h1>
+
+	<h2>All Surveys</h2>
+	<p>
+		<strong>Method:</strong> GET <strong>Endpoint:</strong> <strong><a
+			href="surveys">/surveys</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre><code>[
+  {
+    "surveyId": 1,
+    "surveyName": "Testikysely",
+    "explanation": "Jotain"
+  },
+  {
+   "surveyId": 2,
+   "surveyName": "Testikysely 2",
+   "explanation": "Jotain muuta"
+  }
+]</code></pre>
+
+	<h2>Surveys By Id</h2>
+	<p>
+		<strong>GET </strong><strong> /surveys/{surveyId} </strong> <strong>
+		<a href="/surveys/2">/surveys/2</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre><code>{
+  {
+   "surveyId": 2,
+   "surveyName": "Testikysely 2",
+   "explanation": "Jotain muuta"
+  }
+}</code></pre>
+	<h2>New Surveys</h2>
+	<p>
+		<strong>POST </strong> <strong> /surveys</strong> (Test
+		with <a href="https://www.getpostman.com/" target="_blank">PostMan</a>/etc.)
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre><code>{
+    "surveyName": "Testikysely 3",
+    "explanation": "??"
+}</code></pre>
+</body>
+</html>
