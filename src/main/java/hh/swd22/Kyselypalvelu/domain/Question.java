@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Question {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long questionId;
 	private String questionName;
 
@@ -27,17 +27,17 @@ public class Question {
 
 	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name = "formId")
-	private Form form;
+	@JoinColumn(name = "surveyId")
+	private Survey survey;
 
 	public Question() {
 		super();
 	}
 
-	public Question(String question, Form form) {
+	public Question(String question, Survey survey) {
 		super();
 		this.questionName = question;
-		this.form = form;
+		this.survey = survey;
 	}
 
 	public Long getQuestionId() {
@@ -52,8 +52,8 @@ public class Question {
 		return answers;
 	}
 
-	public Form getForm() {
-		return form;
+	public Survey getSurvey() {
+		return survey;
 	}
 
 	public void setQuestionId(Long questionId) {
@@ -68,15 +68,15 @@ public class Question {
 		this.answers = answers;
 	}
 
-	public void setForm(Form form) {
-		this.form = form;
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
 	}
 
 	@Override
 	public String toString() {
-		if (this.form != null) {
-			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", form="
-					+ this.getForm() + "]";
+		if (this.survey != null) {
+			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", survey="
+					+ this.getSurvey() + "]";
 		} else {
 			return "Question [questionId=" + questionId + ", questionName=" + questionName + "]";
 		}
