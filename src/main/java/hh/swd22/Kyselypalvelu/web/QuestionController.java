@@ -42,7 +42,7 @@ public class QuestionController {
 
 	// Haetaan yhden kyselyn kysymykset REST-metodi
 	@GetMapping("/restsurveys/{surveyId}")
-	public @ResponseBody Optional<Survey> questionListREest(@PathVariable("surveyId") Long surveyId) {
+	public @ResponseBody Optional<Survey> questionListRest(@PathVariable("surveyId") Long surveyId) {
 		return sRepo.findById(surveyId);
 	}
 
