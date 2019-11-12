@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
@@ -45,7 +47,7 @@ public class QuestionController {
 	public @ResponseBody Optional<Survey> questionListREest(@PathVariable("surveyId") Long surveyId) {
 		return sRepo.findById(surveyId);
 	}
-
+				
 	// Haetaan kaikki vastaukset REST-metodi
 	@GetMapping("/answers")
 	public @ResponseBody List<Answer> answersListRest() {
@@ -53,6 +55,12 @@ public class QuestionController {
 	}
 
 	// Kaikki REST-metodit päättyy
+	
+	@GetMapping(value = {"/", "/resthome"}) 
+	public String getHome() {
+		return "resthome";
+	}
+	
 
 	// Hakee surveys tietokannasta getSurveys() "/surveys"
 	@GetMapping("/survey")
@@ -86,20 +94,30 @@ public class QuestionController {
 	}
 
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
+	@GetMapping("/addanswer")
+	public String addNewAnswer(Model model) {
+		model.addAttribute("answer", new Answer());
+		model.addAttribute("questions", qRepo.findAll());
+		return "addanswer";
+	}
 
 	// Tallena surveyn tietokantaan saveSurvey() "/savesurvey"
 	@PostMapping("/savesurvey")
 	public String saveSurvey(@ModelAttribute Survey survey) {
 		sRepo.save(survey);
-		return "redirect:/surveys";
+		return "redirect:/survey";
 	}
 
 	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
 	@PostMapping("/savequestion")
 	public String saveQuestion(@ModelAttribute Question question) {
 		qRepo.save(question);
-		return "redirect:/surveys";
+		return "redirect:/survey";
 	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
-
+	@PostMapping("/saveanswer")
+	public String saveAnswer(@ModelAttribute Answer txtAnswer) {
+		aRepo.save(txtAnswer);
+		return "redirect:/survey";
+	}
 }
