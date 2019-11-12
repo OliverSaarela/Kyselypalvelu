@@ -36,13 +36,13 @@
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>{
+	<pre><code>[
   {
    "surveyId": 2,
    "surveyName": "Testikysely 2",
    "explanation": "Jotain muuta"
   }
-}</code></pre>
+]</code></pre>
 	<h2>New Surveys</h2>
 	<p>
 		<strong>POST </strong> <strong> /surveys</strong> (Test
@@ -51,9 +51,26 @@
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>{
+	<pre><code>[
+  {
     "surveyName": "Testikysely 3",
     "explanation": "??"
-}</code></pre>
+  }
+]</code></pre>
+
+<h2>Answers</h2>
+	<p>
+		<strong>GET </strong><strong> /answers </strong> <strong>
+		<a href="/answers">/answers</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre><code>[
+  {
+    "answerId": 1,
+    "txtAnswer": "2019"
+  }
+]</code></pre>
 </body>
 </html>
