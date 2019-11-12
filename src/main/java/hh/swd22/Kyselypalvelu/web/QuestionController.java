@@ -94,20 +94,30 @@ public class QuestionController {
 	}
 
 	// TODO Tekee tyhjän vastauksen addNewAnswer()
+	@GetMapping("/addanswer")
+	public String addNewAnswer(Model model) {
+		model.addAttribute("answer", new Answer());
+		model.addAttribute("questions", qRepo.findAll());
+		return "addanswer";
+	}
 
 	// Tallena surveyn tietokantaan saveSurvey() "/savesurvey"
 	@PostMapping("/savesurvey")
 	public String saveSurvey(@ModelAttribute Survey survey) {
 		sRepo.save(survey);
-		return "redirect:/surveys";
+		return "redirect:/survey";
 	}
 
 	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
 	@PostMapping("/savequestion")
 	public String saveQuestion(@ModelAttribute Question question) {
 		qRepo.save(question);
-		return "redirect:/surveys";
+		return "redirect:/survey";
 	}
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
-
+	@PostMapping("/saveanswer")
+	public String saveAnswer(@ModelAttribute Answer txtAnswer) {
+		aRepo.save(txtAnswer);
+		return "redirect:/survey";
+	}
 }

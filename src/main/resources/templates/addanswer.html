@@ -14,9 +14,9 @@
 	<form action="#" th:action="@{saveanswer}" th:object=${answer} method="post">
 
 
-		<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
-		<label>Survey: </label><select th:field="*{survey}">
-			<option th:each="survey: ${surveys}" th:value="${survey.surveyId}" th:text="${survey.surveyName}"></option>
+		<label>Answer: </label><input type="text" th:field="${answer.txtAnswer}" /> 
+		<label>Question: </label><select th:field="*{question}">
+			<option th:each="question: ${questions}" th:value="${question.questionId}" th:text="${question.questionName}"></option>
 		</select> 
 		<input type="submit" value="Submit"/>
 		

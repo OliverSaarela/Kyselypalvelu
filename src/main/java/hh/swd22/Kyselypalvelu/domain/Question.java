@@ -22,7 +22,7 @@ public class Question {
 	private Long questionId;
 	private String questionName;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "questionName")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	private List<Answer> answers;
 
 	@ManyToOne
