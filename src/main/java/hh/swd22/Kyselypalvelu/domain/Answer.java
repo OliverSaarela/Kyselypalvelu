@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -19,9 +20,9 @@ public class Answer {
 	private String txtAnswer;
 	
 	@ManyToOne
-	@JsonIgnore
+	@JsonBackReference
 	@JoinColumn(name = "questionId")
-	private Question questionName;
+	private Question question;
 
 	public Answer() {
 		super();
@@ -30,7 +31,7 @@ public class Answer {
 	public Answer(String txtAnswer, Question question) {
 		super();
 		this.txtAnswer = txtAnswer;
-		this.questionName = question;
+		this.question = question;
 	}
 
 	public Long getAnswerId() {
@@ -41,8 +42,8 @@ public class Answer {
 		return txtAnswer;
 	}
 
-	public Question getQuestionName() {
-		return questionName;
+	public Question getQuestion() {
+		return question;
 	}
 
 	public void setAnswerId(Long answerId) {
@@ -53,14 +54,14 @@ public class Answer {
 		this.txtAnswer = txtAnswer;
 	}
 
-	public void setQuestionName(Question question) {
-		this.questionName = question;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 
 	@Override
 	public String toString() {
-		if (this.questionName != null) {
-			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", questionName=" + this.getQuestionName() + "]";
+		if (this.question != null) {
+			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", question=" + this.getQuestion() + "]";
 		}
 		else {
 			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + "]";
