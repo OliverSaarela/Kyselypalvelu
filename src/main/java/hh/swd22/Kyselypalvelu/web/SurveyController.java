@@ -31,8 +31,8 @@ public class SurveyController {
 	@Autowired
 	private QuestionRepository qRepo;
 
-	@Autowired
-	private AnswerRepository aRepo;
+//	@Autowired
+//	private AnswerRepository aRepo;
 
 	// Kaikki REST-metodit alkaa
 	// Haetaan kaikki kyselyt REST-metodi
@@ -47,22 +47,22 @@ public class SurveyController {
 		return sRepo.findById(surveyId);
 	}
 
-	// Haetaan kaikki vastaukset REST-metodi
-	@GetMapping("/answers")
-	public @ResponseBody List<Answer> answersListRest() {
-		return (List<Answer>) aRepo.findAll();
-	}
+//	// Haetaan kaikki vastaukset REST-metodi
+//	@GetMapping("/answers")
+//	public @ResponseBody List<Answer> answersListRest() {
+//		return (List<Answer>) aRepo.findAll();
+//	}
 
-	// Tallenna yhden vastauksen
-	@PostMapping("/saveanswers")
-	public @ResponseBody void saveAnswerRest(@RequestBody List<Answer> answers, Answer answer) {
-
-		for (int i = 0; i < answers.size(); i++) {
-			answer = answers.get(i);
-			aRepo.save(answer);
-		}
-
-	}
+//	// Tallenna yhden vastauksen
+//	@PostMapping("/saveanswers")
+//	public @ResponseBody void saveAnswerRest(@RequestBody List<Answer> answers, Answer answer) {
+//
+//		for (int i = 0; i < answers.size(); i++) {
+//			answer = answers.get(i);
+//			aRepo.save(answer);
+//		}
+//
+//	}
 
 	// Kaikki REST-metodit päättyy
 
@@ -94,21 +94,21 @@ public class SurveyController {
 		return "addsurvey";
 	}
 
-	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
-	@GetMapping("/addquestion")
-	public String addNewQuestion(Model model) {
-		model.addAttribute("question", new Question());
-		model.addAttribute("surveys", sRepo.findAll());
-		return "addquestion";
-	}
+//	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
+//	@GetMapping("/addquestion")
+//	public String addNewQuestion(Model model) {
+//		model.addAttribute("question", new Question());
+//		model.addAttribute("surveys", sRepo.findAll());
+//		return "addquestion";
+//	}
 
-	// TODO Tekee tyhjän vastauksen addNewAnswer()
-	@GetMapping("/addanswer")
-	public String addNewAnswer(Model model) {
-		model.addAttribute("answer", new Answer());
-		model.addAttribute("questions", qRepo.findAll());
-		return "addanswer";
-	}
+//	// TODO Tekee tyhjän vastauksen addNewAnswer()
+//	@GetMapping("/addanswer")
+//	public String addNewAnswer(Model model) {
+//		model.addAttribute("answer", new Answer());
+//		model.addAttribute("questions", qRepo.findAll());
+//		return "addanswer";
+//	}
 
 	// Tallena surveyn tietokantaan saveSurvey() "/savesurvey"
 	@PostMapping("/savesurvey")
@@ -117,18 +117,18 @@ public class SurveyController {
 		return "redirect:/survey";
 	}
 
-	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
-	@PostMapping("/savequestion")
-	public String saveQuestion(@ModelAttribute Question question) {
-		qRepo.save(question);
-		return "redirect:/survey";
-	}
+//	// Tallenna kysymys tietokantaan saveQuestion() "/savequestion"
+//	@PostMapping("/savequestion")
+//	public String saveQuestion(@ModelAttribute Question question) {
+//		qRepo.save(question);
+//		return "redirect:/survey";
+//	}
 
-	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
-	@PostMapping("/saveanswer")
-	public String saveAnswer(@ModelAttribute Answer txtAnswer) {
-		aRepo.save(txtAnswer);
-		return "redirect:/survey";
-	}
-
+//	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
+//	@PostMapping("/saveanswer")
+//	public String saveAnswer(@ModelAttribute Answer txtAnswer) {
+//		aRepo.save(txtAnswer);
+//		return "redirect:/survey";
+//	}
+//
 }
