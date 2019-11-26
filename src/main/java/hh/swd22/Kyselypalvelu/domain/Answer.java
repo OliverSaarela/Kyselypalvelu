@@ -3,6 +3,8 @@ package hh.swd22.Kyselypalvelu.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +28,9 @@ public class Answer {
 	@JoinColumn(name = "questionId")
 	private Question question;
 	
-	
-	private List<Option> options = new ArrayList<Option>();
+	@Column
+	@ElementCollection(targetClass=Option.class)
+	private List<Option> pickedOptions = new ArrayList<Option>();
 
 	public Answer() {
 		super();
@@ -52,7 +55,7 @@ public class Answer {
 	}
 
 	public List<Option> getOptions() {
-		return options;
+		return pickedOptions;
 	}
 
 	public void setAnswerId(Long answerId) {
@@ -68,7 +71,7 @@ public class Answer {
 	}
 
 	public void setOptions(List<Option> options) {
-		this.options = options;
+		this.pickedOptions = options;
 	}
 
 	@Override
