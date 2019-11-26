@@ -1,5 +1,6 @@
 package hh.swd22.Kyselypalvelu.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,7 +26,8 @@ public class Answer {
 	@JoinColumn(name = "questionId")
 	private Question question;
 	
-	private List<Option> options;
+	
+	private List<Option> options = new ArrayList<Option>();
 
 	public Answer() {
 		super();
