@@ -1,5 +1,7 @@
 package hh.swd22.Kyselypalvelu.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -19,9 +21,11 @@ public class Answer {
 	private String txtAnswer;
 	
 	@ManyToOne
-	@JsonIgnore
+	@JsonBackReference
 	@JoinColumn(name = "questionId")
 	private Question question;
+	
+	private List<Option> options;
 
 	public Answer() {
 		super();
@@ -45,6 +49,10 @@ public class Answer {
 		return question;
 	}
 
+	public List<Option> getOptions() {
+		return options;
+	}
+
 	public void setAnswerId(Long answerId) {
 		this.answerId = answerId;
 	}
@@ -55,6 +63,10 @@ public class Answer {
 
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
 
 	@Override

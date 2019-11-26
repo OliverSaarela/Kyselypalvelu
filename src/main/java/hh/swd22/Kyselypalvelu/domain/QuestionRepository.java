@@ -8,5 +8,6 @@ public interface QuestionRepository extends CrudRepository<Question, Long>{
 
 	List<Question> findByQuestionName(String questionName);
 	List<Question> findBySurvey(Survey survey);
+	Question findByquestionId(Long questionId);
 	
 }
