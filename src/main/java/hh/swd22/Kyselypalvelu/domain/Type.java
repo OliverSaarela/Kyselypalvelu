@@ -24,9 +24,8 @@ public class Type {
 		super();
 	}
 
-	public Type(Long typeId, String typeName) {
+	public Type(String typeName) {
 		super();
-		this.typeId = typeId;
 		this.typeName = typeName;
 	}
 

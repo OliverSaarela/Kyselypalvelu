@@ -44,6 +44,12 @@ public class Question {
 		this.survey = survey;
 		this.required = required;
 	}
+	public Question(String questionName, Survey survey) {
+		super();
+		this.questionName = questionName;
+		this.survey = survey;
+		
+	}
 
 	public boolean isRequired() {
 		return required;
