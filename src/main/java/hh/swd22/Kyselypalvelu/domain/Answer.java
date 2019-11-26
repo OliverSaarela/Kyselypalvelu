@@ -1,5 +1,8 @@
 package hh.swd22.Kyselypalvelu.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -19,9 +22,12 @@ public class Answer {
 	private String txtAnswer;
 	
 	@ManyToOne
-	@JsonIgnore
+	@JsonBackReference
 	@JoinColumn(name = "questionId")
-	private Question questionName;
+	private Question question;
+	
+	
+	private List<Option> options = new ArrayList<Option>();
 
 	public Answer() {
 		super();
@@ -30,7 +36,7 @@ public class Answer {
 	public Answer(String txtAnswer, Question question) {
 		super();
 		this.txtAnswer = txtAnswer;
-		this.questionName = question;
+		this.question = question;
 	}
 
 	public Long getAnswerId() {
@@ -41,8 +47,12 @@ public class Answer {
 		return txtAnswer;
 	}
 
-	public Question getQuestionName() {
-		return questionName;
+	public Question getQuestion() {
+		return question;
+	}
+
+	public List<Option> getOptions() {
+		return options;
 	}
 
 	public void setAnswerId(Long answerId) {
@@ -53,14 +63,18 @@ public class Answer {
 		this.txtAnswer = txtAnswer;
 	}
 
-	public void setQuestionName(Question question) {
-		this.questionName = question;
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
 
 	@Override
 	public String toString() {
-		if (this.questionName != null) {
-			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", questionName=" + this.getQuestionName() + "]";
+		if (this.question != null) {
+			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", question=" + this.getQuestion() + "]";
 		}
 		else {
 			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + "]";

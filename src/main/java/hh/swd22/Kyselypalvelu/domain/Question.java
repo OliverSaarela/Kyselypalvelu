@@ -22,21 +22,24 @@ public class Question {
 	private Long questionId;
 	private String questionName;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "questionName")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	private List<Answer> answers;
 
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "surveyId")
 	private Survey survey;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+	private List<Option> options;
 
 	public Question() {
 		super();
 	}
 
-	public Question(String question, Survey survey) {
+	public Question(String questionName, Survey survey) {
 		super();
-		this.questionName = question;
+		this.questionName = questionName;
 		this.survey = survey;
 	}
 
@@ -56,6 +59,10 @@ public class Question {
 		return survey;
 	}
 
+	public List<Option> getOptions() {
+		return options;
+	}
+
 	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
 	}
@@ -70,6 +77,10 @@ public class Question {
 
 	public void setSurvey(Survey survey) {
 		this.survey = survey;
+	}
+
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
 
 	@Override
