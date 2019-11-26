@@ -54,8 +54,8 @@ public class SurveyController {
 
 	// Tallenna yhden vastauksen
 	@PostMapping("/saveanswers")
-	public @ResponseBody void saveAnswerRest(@RequestBody List<Answer> answers, Answer answer) {
-
+	public @ResponseBody void saveAnswerRest(@RequestBody List<Answer> answers) {
+		Answer answer = null;
 		for (int i = 0; i < answers.size(); i++) {
 			answer = answers.get(i);
 			aRepo.save(answer);

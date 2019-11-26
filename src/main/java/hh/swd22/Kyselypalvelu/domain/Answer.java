@@ -3,6 +3,7 @@ package hh.swd22.Kyselypalvelu.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,9 +30,10 @@ public class Answer {
 	@JoinColumn(name = "questionId")
 	private Question question;
 	
-	@Column
-	@ElementCollection(targetClass=Option.class)
-	private List<Option> pickedOptions = new ArrayList<Option>();
+	//@Column
+	//@ElementCollection(targetClass=Option.class)
+	@OneToMany
+	private List<Option> options;
 
 	public Answer() {
 		super();
@@ -55,7 +58,7 @@ public class Answer {
 	}
 
 	public List<Option> getOptions() {
-		return pickedOptions;
+		return options;
 	}
 
 	public void setAnswerId(Long answerId) {
@@ -71,7 +74,7 @@ public class Answer {
 	}
 
 	public void setOptions(List<Option> options) {
-		this.pickedOptions = options;
+		this.options = options;
 	}
 
 	@Override
