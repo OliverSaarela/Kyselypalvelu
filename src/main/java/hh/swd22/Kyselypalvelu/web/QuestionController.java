@@ -126,8 +126,8 @@ public class QuestionController {
 
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
 	@PostMapping("/saveanswer")
-	public String saveAnswer(@ModelAttribute Answer txtAnswer) {
-		aRepo.save(txtAnswer);
+	public String saveAnswer(@ModelAttribute Answer answer) {
+		aRepo.save(answer);
 		return "redirect:/survey";
 	}
 
