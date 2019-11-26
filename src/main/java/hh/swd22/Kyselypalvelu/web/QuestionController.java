@@ -36,10 +36,18 @@ public class QuestionController {
 
 	// Kaikki REST-metodit alkaa
 	// Haetaan kaikki kyselyt REST-metodi
+
 //	@GetMapping("/surveys")
 //	public @ResponseBody List<Survey> surveyListRest() {
 //		return (List<Survey>) sRepo.findAll();
 //	}
+
+
+//	@GetMapping("/surveys")
+//	public @ResponseBody List<Survey> surveyListRest() {
+//		return (List<Survey>) sRepo.findAll();
+//	}
+	
 
 	// Haetaan yhden kyselyn kysymykset REST-metodi
 //	@GetMapping("/surveys/{surveyId}")
@@ -125,10 +133,17 @@ public class QuestionController {
 	}
 
 	// TODO Tallenna vastaus tietokantaan saveAnswer() "/saveanswer"
+
 //	@PostMapping("/saveanswer")
 //	public String saveAnswer(@ModelAttribute Answer txtAnswer) {
 //		aRepo.save(txtAnswer);
 //		return "redirect:/survey";
 //	}
 //
+
+//	@PostMapping("/saveanswer")
+//	public String saveAnswer(@ModelAttribute Answer answer) {
+//		aRepo.save(answer);
+//		return "redirect:/survey";
+//	}
 }
