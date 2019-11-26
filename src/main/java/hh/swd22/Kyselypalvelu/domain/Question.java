@@ -21,6 +21,7 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long questionId;
 	private String questionName;
+	private boolean required;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	private List<Answer> answers;
@@ -37,10 +38,19 @@ public class Question {
 		super();
 	}
 
-	public Question(String questionName, Survey survey) {
+	public Question(String questionName, Survey survey, boolean required) {
 		super();
 		this.questionName = questionName;
 		this.survey = survey;
+		this.required = required;
+	}
+
+	public boolean isRequired() {
+		return required;
+	}
+
+	public void setRequired(boolean required) {
+		this.required = required;
 	}
 
 	public Long getQuestionId() {
@@ -87,9 +97,9 @@ public class Question {
 	public String toString() {
 		if (this.survey != null) {
 			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", survey="
-					+ this.getSurvey() + "]";
+					+ this.getSurvey() + ", required=" + required + "]";
 		} else {
-			return "Question [questionId=" + questionId + ", questionName=" + questionName + "]";
+			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", required=" + required + "]";
 		}
 	}
 
