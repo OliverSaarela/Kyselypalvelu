@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
 import hh.swd22.Kyselypalvelu.domain.AnswerRepository;
+import hh.swd22.Kyselypalvelu.domain.Option;
+import hh.swd22.Kyselypalvelu.domain.OptionRepository;
 import hh.swd22.Kyselypalvelu.domain.Question;
 import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
 import hh.swd22.Kyselypalvelu.domain.Survey;
@@ -24,7 +26,7 @@ public class KyselypalveluApplication {
 	}
 
 	@Bean
-	public CommandLineRunner formDemo(QuestionRepository qRepo, SurveyRepository sRepo, AnswerRepository aRepo) {
+	public CommandLineRunner formDemo(QuestionRepository qRepo, SurveyRepository sRepo, AnswerRepository aRepo, OptionRepository oRepo) {
 		return (args) -> {
 			log.info("Testi");
 
@@ -42,8 +44,10 @@ public class KyselypalveluApplication {
 					sRepo.findBySurveyName("Testikysely").get(0)));
 			
 			qRepo.save(new Question("Mitä?", sRepo.findBySurveyName("Testikysely 2").get(0)));
-
-			aRepo.save(new Answer("2019", qRepo.findByQuestionName("Minkä vuoden opiskelija olet?").get(0)));
+			
+			oRepo.save(new Option("Ensimmäisen", qRepo.findByQuestionName("Minkä vuoden opiskelija olet?").get(0)));
+			oRepo.save(new Option("Toisen", qRepo.findByQuestionName("Minkä vuoden opiskelija olet?").get(0)));
+			oRepo.save(new Option("Kolmannen", qRepo.findByQuestionName("Minkä vuoden opiskelija olet?").get(0)));
 
 			/*
 			 * log.info("Testihaku"); for (Answer answer: aRepo.findAll()) {
