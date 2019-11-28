@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.swd22.Kyselypalvelu.domain.Question;
 import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
+import hh.swd22.Kyselypalvelu.domain.Survey;
 import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 
 @CrossOrigin
@@ -37,5 +41,19 @@ public class QuestionController {
 		qRepo.save(question);
 		return "redirect:/survey";
 	}
+	
+//	@RequestMapping(value = "/editquestion/{id}")
+//	public String editQuestion(@PathVariable("id") Long surveyId, Model model) {
+//	
+//		model.addAttribute("survey", sRepo.findById(questionId));
+//		sRepo.deleteById(surveyId);
+//		return "editsurvey";
+//	}
+//	
+//	@RequestMapping(value = "editsurvey/save", method = RequestMethod.POST)
+//	public String saveEdit(Survey survey){
+//	    sRepo.save(survey);
+//	    return "redirect:../survey";
+//	}   
 
 }

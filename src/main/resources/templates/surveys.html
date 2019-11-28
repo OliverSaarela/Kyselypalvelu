@@ -20,7 +20,9 @@
 <tr th:each="survey : ${surveys}">
 	<td th:text=${survey.surveyName}></td>
 	<td th:text=${survey.explanation}></td>
-	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show from</a></td>
+	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show form</a></td>
+	<td><a th:href="@{/editsurvey/{id}(id=${survey.surveyId})}">Edit</a></td> 
+
 </tr>
 
 </table>
