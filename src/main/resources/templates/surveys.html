@@ -21,6 +21,7 @@
 	<td th:text=${survey.surveyName}></td>
 	<td th:text=${survey.explanation}></td>
 	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show from</a></td>
+	<td><a th:href="@{/delete/{id}(id=${survey.surveyId})}">Delete</a></td>
 </tr>
 
 </table>
