@@ -97,6 +97,12 @@ public class SurveyController {
 		sRepo.save(survey);
 		return "redirect:/survey";
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteSurvey(@PathVariable("id") Long surveyId) {
+		sRepo.deleteById(surveyId);
+		return "redirect:../survey";
+	}
 
 	@RequestMapping(value = "/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {

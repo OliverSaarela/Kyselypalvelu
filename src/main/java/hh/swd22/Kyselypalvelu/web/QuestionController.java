@@ -41,6 +41,7 @@ public class QuestionController {
 		qRepo.save(question);
 		return "redirect:/survey";
 	}
+
 	
 //	@RequestMapping(value = "/editquestion/{id}")
 //	public String editQuestion(@PathVariable("id") Long surveyId, Model model) {
@@ -55,5 +56,11 @@ public class QuestionController {
 //	    sRepo.save(survey);
 //	    return "redirect:../survey";
 //	}   
+
+//	@GetMapping("/delete/{id}")
+//	public String deleteQuestion(@PathVariable("id") Long questionId) {
+//		qRepo.deleteById(questionId);
+//		return "redirect:../survey/{id}";
+//	}
 
 }

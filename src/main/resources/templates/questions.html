@@ -15,7 +15,7 @@
 
 		<tr th:each="question : ${questions}">
 			<td th:text=${question.questionName}></td>
-			<td></td>
+<!-- 			<td><a th:href="@{/delete/{id}(id=${question.questionId})}">Delete</a></td> -->
 		</tr>
 
 	</table>
