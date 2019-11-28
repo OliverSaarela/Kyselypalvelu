@@ -20,14 +20,14 @@
 <tr th:each="survey : ${surveys}">
 	<td th:text=${survey.surveyName}></td>
 	<td th:text=${survey.explanation}></td>
-<<<<<<< HEAD
+
 	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show form</a></td>
 	<td><a th:href="@{/editsurvey/{id}(id=${survey.surveyId})}">Edit</a></td> 
 
-=======
+
 	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show from</a></td>
 	<td><a th:href="@{/delete/{id}(id=${survey.surveyId})}">Delete</a></td>
->>>>>>> 62137ab81947470e884d4dd6a3c11546c8436397
+
 </tr>
 
 </table>

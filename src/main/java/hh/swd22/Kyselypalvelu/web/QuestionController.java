@@ -60,7 +60,7 @@ public class QuestionController {
 //	@GetMapping("/delete/{id}")
 //	public String deleteQuestion(@PathVariable("id") Long questionId) {
 //		qRepo.deleteById(questionId);
-//		return "redirect:../survey/{id}";
+//		return "redirect:../questions";
 //	}
 
 }
