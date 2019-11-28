@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
@@ -110,5 +112,26 @@ public class SurveyController {
 		surveyRepo.save(survey);
 		return "redirect:/survey";
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteSurvey(@PathVariable("id") Long surveyId) {
+		sRepo.deleteById(surveyId);
+		return "redirect:../survey";
+	}
 
+	@RequestMapping(value = "/editsurvey/{id}")
+	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
+	
+		model.addAttribute("survey", sRepo.findById(surveyId));
+		sRepo.deleteById(surveyId);
+		return "editsurvey";
+	}
+	
+	@RequestMapping(value = "editsurvey/save", method = RequestMethod.POST)
+	public String saveEdit(Survey survey){
+	    sRepo.save(survey);
+	    return "redirect:../survey";
+	}   
+	
 }
+	
