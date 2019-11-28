@@ -1,11 +1,8 @@
 package hh.swd22.Kyselypalvelu.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +13,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
 public class Answer {
 
@@ -24,16 +20,16 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long answerId;
 	private String txtAnswer;
-	
+
 	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "questionId")
 	private Question question;
-	
-	//@Column
-	//@ElementCollection(targetClass=Option.class)
-	@OneToMany
-	private List<Option> options;
+
+	// @Column
+	// @ElementCollection(targetClass=Option.class)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "answer")
+	private List<SelectedAnswer> selectedAnswers;
 
 	public Answer() {
 		super();
@@ -57,8 +53,8 @@ public class Answer {
 		return question;
 	}
 
-	public List<Option> getOptions() {
-		return options;
+	public List<SelectedAnswer> getSelectedAnswers() {
+		return selectedAnswers;
 	}
 
 	public void setAnswerId(Long answerId) {
@@ -73,19 +69,18 @@ public class Answer {
 		this.question = question;
 	}
 
-	public void setOptions(List<Option> options) {
-		this.options = options;
+	public void setSelectedAnswers(List<SelectedAnswer> selectedAnswers) {
+		this.selectedAnswers = selectedAnswers;
 	}
 
 	@Override
 	public String toString() {
 		if (this.question != null) {
-			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", question=" + this.getQuestion() + "]";
-		}
-		else {
+			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", question=" + this.getQuestion()
+					+ "]";
+		} else {
 			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + "]";
 		}
 	}
-	
-	
+
 }
