@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit question</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>Edit question</h2>
+	<div>
+	<form action="#" th:action="@{savequestion}"  th:object= ${question} method="post">
+	<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
+	<input type="hidden" value="(id=${survey.surveyId})" />
+	<input type="submit" value="Submit"/>
+
+	</form>
+</div>
+	
+</body>
+</html>
