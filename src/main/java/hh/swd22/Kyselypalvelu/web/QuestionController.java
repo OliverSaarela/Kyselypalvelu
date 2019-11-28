@@ -43,19 +43,19 @@ public class QuestionController {
 	}
 
 	
-//	@RequestMapping(value = "/editquestion/{id}")
-//	public String editQuestion(@PathVariable("id") Long surveyId, Model model) {
-//	
-//		model.addAttribute("survey", sRepo.findById(questionId));
-//		sRepo.deleteById(surveyId);
-//		return "editsurvey";
-//	}
-//	
-//	@RequestMapping(value = "editsurvey/save", method = RequestMethod.POST)
-//	public String saveEdit(Survey survey){
-//	    sRepo.save(survey);
-//	    return "redirect:../survey";
-//	}   
+	@RequestMapping(value = "/editquestion/{id}")
+	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
+	
+		model.addAttribute("question", qRepo.findById(questionId));
+		sRepo.deleteById(questionId);
+		return "editquestion";
+	}
+	
+	@RequestMapping(value = "editquestion/save", method = RequestMethod.POST)
+	public String saveEdit(Question question){
+	    qRepo.save(question);
+	    return "redirect:../questions";
+	}   
 
 //	@GetMapping("/delete/{id}")
 //	public String deleteQuestion(@PathVariable("id") Long questionId) {
