@@ -1,5 +1,7 @@
 package hh.swd22.Kyselypalvelu.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.swd22.Kyselypalvelu.domain.Question;
 import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
-import hh.swd22.Kyselypalvelu.domain.Survey;
 import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 
 @CrossOrigin
@@ -42,25 +42,21 @@ public class QuestionController {
 		return "redirect:/survey";
 	}
 
-	
-	@RequestMapping(value = "/editquestion/{id}")
-	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
-	
-		model.addAttribute("question", qRepo.findById(questionId));
-		sRepo.deleteById(questionId);
-		return "editquestion";
+	// Poistaa kysymyksen kyselystä
+	@RequestMapping(value = "/deletequestion/{id}")
+	public String deleteQuestion(@PathVariable("id") Long questionId) {
+		qRepo.deleteById(questionId);
+		return "redirect:../survey";
 	}
 	
-	@RequestMapping(value = "editquestion/save", method = RequestMethod.POST)
-	public String saveEdit(Question question){
-	    qRepo.save(question);
-	    return "redirect:../questions";
-	}   
 
-//	@GetMapping("/delete/{id}")
-//	public String deleteQuestion(@PathVariable("id") Long questionId) {
-//		qRepo.deleteById(questionId);
-//		return "redirect:../questions";
-//	}
+
+	@GetMapping("/editquestion/{id}")
+	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
+		
+		model.addAttribute("question", qRepo.findById(questionId));
+		model.addAttribute("survey", sRepo.findAll());
+		return "editquestion";
+	}
 
 }

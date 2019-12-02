@@ -8,9 +8,13 @@
 
 <h2>Edit question</h2>
 	<div>
-	<form action="#" th:action="@{savequestion}"  th:object= ${question} method="post">
+	<form action="#" th:action="@{/savequestion}"  th:object= ${question} method="post">
+	<input type="hidden" th:field="${question.questionId}"/>
 	<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
-	<input type="hidden" value="(id=${survey.surveyId})" />
+	<label>Survey: </label>
+	<select th:field="*{survey}">
+		<option th:each="survey: ${survey}" th:value="${survey.surveyId}" th:text="${survey.surveyName}">
+	</select>
 	<input type="submit" value="Submit"/>
 
 	</form>

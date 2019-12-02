@@ -113,25 +113,21 @@ public class SurveyController {
 		return "redirect:/survey";
 	}
 	
-	@GetMapping("/delete/{id}")
+	// Poistaa kyselyn tietokannasta
+	@GetMapping("/deletesurvey/{id}")
 	public String deleteSurvey(@PathVariable("id") Long surveyId) {
-		sRepo.deleteById(surveyId);
+		surveyRepo.deleteById(surveyId);
 		return "redirect:../survey";
 	}
 
+	// Muokkaa kyselyä
 	@RequestMapping(value = "/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
 	
-		model.addAttribute("survey", sRepo.findById(surveyId));
-		sRepo.deleteById(surveyId);
+		model.addAttribute("survey", surveyRepo.findById(surveyId));
 		return "editsurvey";
 	}
-	
-	@RequestMapping(value = "editsurvey/save", method = RequestMethod.POST)
-	public String saveEdit(Survey survey){
-	    sRepo.save(survey);
-	    return "redirect:../survey";
-	}   
+	  
 	
 }
 	
