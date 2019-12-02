@@ -5,7 +5,7 @@
 <title>REST Home Page</title>
 </head>
 <body>
-<h1>REST Home Page</h1>
+	<h1>REST Home Page</h1>
 
 	<h2>All Surveys</h2>
 	<p>
@@ -15,108 +15,192 @@
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>[
+	<pre>
+		<code>
+[
   {
     "surveyId": 1,
-    "surveyName": "Testikysely",
-    "explanation": "Jotain"
-  },
-  {
-   "surveyId": 2,
-   "surveyName": "Testikysely 2",
-   "explanation": "Jotain muuta"
+    "surveyName": "Käyttäjäkysely Haaga-Helian kansainvälisyyspalveluista",
+    "explanation": "Tämän kyselyn tarkoituksena on kehittää Haaga-Helian kansainvälisyyspalveluita. Kysely on suunnattu Haaga-Helian Suomessa asuville opiskelijoille jotka ovat käyttäneet kansainvälisyyspalveluita.",
+    "questions": [
+      {
+        "questionId": 1,
+        "questionName": "Valitse oma koulutusohjelmasi tai kampuksesi:",
+        "required": true,
+        "type": {
+          "typeId": 4,
+          "typeName": "select"
+        },
+        "options": [
+          {
+            "optionId": 1,
+            "optionName": "Haagan kampuksen koulutusohjelmat",
+            "selectedAnswers": [
+              
+            ]
+          },
+          {
+            "optionId": 2,
+            "optionName": "Porvoon kampuksen koulutusohjelmat",
+            "selectedAnswers": [
+              
+            ]
+          }
+         ],
+        "answers": [
+          
+        ]
+      },
+      {
+        "questionId": 2,
+        "questionName": "Avoin palaute kansainvälisyyspalveluista ja tiedon saatavuudesta MyNetissä",
+        "required": false,
+        "type": {
+          "typeId": 1,
+          "typeName": "text"
+        },
+        "options": [
+          
+        ],
+        "answers": [
+          
+        ]
+      }
+    ]
   }
-]</code></pre>
+]</code>
+	</pre>
 
-	<h2>Surveys By Id</h2>
+	<h2>Survey By Id</h2>
 	<p>
 		<strong>GET </strong><strong> /surveys/{surveyId} </strong> <strong>
-		<a href="/surveys/2">/surveys/2</a></strong>
+			<a href="/surveys/2">/surveys/2</a>
+		</strong>
 	</p>
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>[
+	<pre>
+		<code>
+[
   {
-   "surveyId": 2,
-   "surveyName": "Testikysely 2",
-   "explanation": "Jotain muuta"
+    "surveyId": 1,
+    "surveyName": "Käyttäjäkysely Haaga-Helian kansainvälisyyspalveluista",
+    "explanation": "Tämän kyselyn tarkoituksena on kehittää Haaga-Helian kansainvälisyyspalveluita. Kysely on suunnattu Haaga-Helian Suomessa asuville opiskelijoille jotka ovat käyttäneet kansainvälisyyspalveluita.",
+    "questions": [
+      {
+        "questionId": 1,
+        "questionName": "Valitse oma koulutusohjelmasi tai kampuksesi:",
+        "required": true,
+        "type": {
+          "typeId": 4,
+          "typeName": "select"
+        },
+        "options": [
+          {
+            "optionId": 1,
+            "optionName": "Haagan kampuksen koulutusohjelmat",
+            "selectedAnswers": [
+              
+            ]
+          },
+          {
+            "optionId": 2,
+            "optionName": "Porvoon kampuksen koulutusohjelmat",
+            "selectedAnswers": [
+              
+            ]
+          }
+         ],
+        "answers": [
+          
+        ]
+      },
+      {
+        "questionId": 2,
+        "questionName": "Avoin palaute kansainvälisyyspalveluista ja tiedon saatavuudesta MyNetissä",
+        "required": false,
+        "type": {
+          "typeId": 1,
+          "typeName": "text"
+        },
+        "options": [
+          
+        ],
+        "answers": [
+          
+        ]
+      }
+    ]
   }
-]</code></pre>
-	<h2>New Surveys</h2>
-	<p>
-		<strong>POST </strong> <strong> /surveys</strong> (Test
-		with <a href="https://www.getpostman.com/" target="_blank">PostMan</a>/etc.)
-	</p>
-	<p>
-		<strong>JSON Example:</strong>
-	</p>
-	<pre><code>[
-  {
-    "surveyName": "Testikysely 3",
-    "explanation": "??"
-  }
-]</code></pre>
+]</code>
+	</pre>
 
-<h2>Answers</h2>
+	<h2>Answers MUUTA TÄMÄ NÄYTTÄMÄÄN YHDEN KYSELYN/KYSYMYKSEN VASTAUKSET</h2>
 	<p>
-		<strong>GET </strong><strong> /answers </strong> <strong>
-		<a href="/answers">/answers</a></strong>
+		<strong>GET </strong><strong> /answers </strong> <strong> <a
+			href="/answers">/answers</a></strong>
 	</p>
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>[
+	<pre>
+		<code>
+[
   {
     "answerId": 1,
-    "txtAnswer": "2019"
+    "txtAnswer": "",
+    "selectedAnswers": [
+      {
+        "selectedAnswerId": 1,
+        "option": {
+          "optionId": 5,
+          "optionName": "Finanssi- ja talousasiantuntijan koulutusohjelma (FINA)"
+        }
+      }
+    ]
+  },
+  {
+    "answerId": 2,
+    "txtAnswer": "Hieno kysely",
+    "selectedAnswers": [
+      
+    ]
   }
-]</code></pre>
+]</code>
+	</pre>
 
-<h2>SendAnswersJsonPost</h2>
+	<h2>SendAnswersJsonPost</h2>
 	<p>
 		<strong>POST </strong><strong> /saveanswers </strong>
 	</p>
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>[
-   [
+	<pre>
+		<code>
+[
     {
-        "txtAnswer": "Eka tai null",
+        "txtAnswer": "VAIHTOEHTOVASTAUKSISSÄ TÄMÄ ON TYHJÄ",
         "question": {
             "questionId": 1
         },
         "selectedAnswers": [
             {
                 "option": {
-                	"optionId": 1
-                }
-            },{
-                "option": {
-                	"optionId": 2
+                    "optionId": 5
                 }
             }
         ]
     },
     {
-        "txtAnswer": "Toka tai null",
+        "txtAnswer": "Tähän laitetaan avoimen kysymyksen vastaus",
         "question": {
-            "questionId": 1
+            "questionId": 6
         },
-        "selectedAnswers": [
-            {
-                "option": {
-                	"optionId": 1
-                }
-            },{
-                "option": {
-                	"optionId": 2
-                }
-            }
-        ]
+        "selectedAnswers": []
     }
-    
-]</code></pre>
+]</code>
+	</pre>
 </body>
 </html>
