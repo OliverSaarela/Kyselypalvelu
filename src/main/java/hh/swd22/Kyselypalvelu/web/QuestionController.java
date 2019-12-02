@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import hh.swd22.Kyselypalvelu.domain.Question;
 import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
+import hh.swd22.Kyselypalvelu.domain.Survey;
 import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 import hh.swd22.Kyselypalvelu.domain.TypeRepository;
 
@@ -27,6 +27,13 @@ public class QuestionController {
 	
 	@Autowired
 	private TypeRepository tRepo;
+	
+	// Hakee kysymykset tietokannasta getQuestions() "/survey/{surveyId}"
+	@GetMapping("/survey/{surveyId}")
+	public String getQuestions(@PathVariable("surveyId") Survey surveyId, Model model) {
+		model.addAttribute("questions", qRepo.findBySurvey(surveyId));
+		return "questions";
+	}
 
 	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
 	@GetMapping("/addquestion")
@@ -45,15 +52,15 @@ public class QuestionController {
 	}
 
 	// Poistaa kysymyksen kyselystä
-	@RequestMapping(value = "/deletequestion/{id}")
-	public String deleteQuestion(@PathVariable("id") Long questionId) {
+	@GetMapping("/deletequestion/{questionId}")
+	public String deleteQuestion(@PathVariable("questionId") Long questionId) {
 		qRepo.deleteById(questionId);
 		return "redirect:../survey";
 	}
 
 	// Muokkaa kysymystä
-	@GetMapping("/editquestion/{id}")
-	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
+	@GetMapping("/editquestion/{questionId}")
+	public String editQuestion(@PathVariable("questionId") Long questionId, Model model) {
 		Question question = qRepo.findByquestionId(questionId);
 		boolean required = question.isRequired();
 		

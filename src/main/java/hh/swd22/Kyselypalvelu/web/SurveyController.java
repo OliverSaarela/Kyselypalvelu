@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
 import hh.swd22.Kyselypalvelu.domain.AnswerRepository;
-import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
 import hh.swd22.Kyselypalvelu.domain.SelectedAnswer;
 import hh.swd22.Kyselypalvelu.domain.SelectedAnswerRepository;
 import hh.swd22.Kyselypalvelu.domain.Survey;
@@ -29,9 +27,6 @@ public class SurveyController {
 
 	@Autowired
 	private SurveyRepository surveyRepo;
-
-	@Autowired
-	private QuestionRepository questionRepo;
 
 	@Autowired
 	private AnswerRepository answerRepo;
@@ -78,7 +73,7 @@ public class SurveyController {
 		return answers;
 
 	}
-	//Tähän päättyy kaikki rest-metodit
+	// Tähän päättyy kaikki rest-metodit
 	//
 	//
 	//
@@ -96,13 +91,6 @@ public class SurveyController {
 	public String getSurveys(Model model) {
 		model.addAttribute("surveys", surveyRepo.findAll());
 		return "surveys";
-	}
-
-	// Hakee kysymykset tietokannasta getQuestions() "/survey/{surveyName}"
-	@GetMapping("/survey/{surveyName}")
-	public String getQuestions(@PathVariable("surveyName") Survey surveyName, Model model) {
-		model.addAttribute("questions", questionRepo.findBySurvey(surveyName));
-		return "questions";
 	}
 
 	// Tekee tyhjän surveyn addNewSurvey() "/addsurvey"
@@ -127,7 +115,7 @@ public class SurveyController {
 	}
 
 	// Muokkaa kyselyä
-	@RequestMapping(value = "/editsurvey/{id}")
+	@GetMapping("/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
 		model.addAttribute("survey", surveyRepo.findById(surveyId));
 		return "editsurvey";

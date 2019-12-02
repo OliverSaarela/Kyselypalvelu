@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Forms</title>
+<title>Questions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
 	<h1>Questions</h1>
-	
+
 	<table>
 		<tr>
 			<th>Questions</th>
@@ -15,13 +15,15 @@
 
 		<tr th:each="question : ${questions}">
 			<td th:text=${question.questionName}></td>
-	<td><a th:href="@{/deletequestion/{id}(id=${question.questionId})}">Delete</a></td>
-	<td><a th:href="@{/editquestion/{id}(id=${question.questionId})}">Edit</a></td> 
+
+			<td><a th:href="@{/survey/{surveyId}/{questionId} (surveyId=${question.survey.surveyId}, questionId=${question.questionId})}">Show options</a></td>
+			<td><a th:href="@{/editquestion/{questionId}(questionId=${question.questionId})}">Edit</a></td>
+			<td><a th:href="@{/deletequestion/{questionId}(quesitonId=${question.questionId})}">Delete</a></td>
 
 		</tr>
 
 	</table>
-	
+
 	<button onClick="history.go(-1)">Return</button>
 
 </body>
