@@ -78,6 +78,13 @@ public class SurveyController {
 		return answers;
 
 	}
+	//Tähän päättyy kaikki rest-metodit
+	//
+	//
+	//
+	//
+	//
+	//
 
 	@GetMapping(value = { "/", "/resthome" })
 	public String getHome() {

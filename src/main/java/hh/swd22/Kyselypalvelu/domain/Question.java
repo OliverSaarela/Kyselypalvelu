@@ -22,6 +22,13 @@ public class Question {
 	private String questionName;
 	private boolean required;
 
+	@ManyToOne
+	@JoinColumn(name = "typeId")
+	private Type type;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+	private List<Option> options;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	private List<Answer> answers;
 
@@ -30,13 +37,7 @@ public class Question {
 	@JoinColumn(name = "surveyId")
 	private Survey survey;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-	private List<Option> options;
-
-	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "typeId")
-	private Type type;
+	
 
 	public Question() {
 		super();
