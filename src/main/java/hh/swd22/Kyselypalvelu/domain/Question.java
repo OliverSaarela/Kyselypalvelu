@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -24,7 +23,6 @@ public class Question {
 	private boolean required;
 
 	@ManyToOne
-	@JsonBackReference
 	@JoinColumn(name = "typeId")
 	private Type type;
 	
