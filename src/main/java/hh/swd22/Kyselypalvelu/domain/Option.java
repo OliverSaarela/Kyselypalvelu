@@ -14,39 +14,37 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Answer {
+public class Option {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long answerId;
-	private String txtAnswer;
+	private Long optionId;
+	private String optionName;
 
 	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "questionId")
 	private Question question;
 
-	// @Column
-	// @ElementCollection(targetClass=Option.class)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "answer")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "option")
 	private List<SelectedAnswer> selectedAnswers;
 
-	public Answer() {
+	public Option() {
 		super();
 	}
 
-	public Answer(String txtAnswer, Question question) {
+	public Option(String optionName, Question question) {
 		super();
-		this.txtAnswer = txtAnswer;
+		this.optionName = optionName;
 		this.question = question;
 	}
 
-	public Long getAnswerId() {
-		return answerId;
+	public Long getOptionId() {
+		return optionId;
 	}
 
-	public String getTxtAnswer() {
-		return txtAnswer;
+	public String getOptionName() {
+		return optionName;
 	}
 
 	public Question getQuestion() {
@@ -57,12 +55,12 @@ public class Answer {
 		return selectedAnswers;
 	}
 
-	public void setAnswerId(Long answerId) {
-		this.answerId = answerId;
+	public void setOptionId(Long optionId) {
+		this.optionId = optionId;
 	}
 
-	public void setTxtAnswer(String txtAnswer) {
-		this.txtAnswer = txtAnswer;
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
 	}
 
 	public void setQuestion(Question question) {
@@ -75,12 +73,7 @@ public class Answer {
 
 	@Override
 	public String toString() {
-		if (this.question != null) {
-			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + ", question=" + this.getQuestion()
-					+ "]";
-		} else {
-			return "Answer [answerId=" + answerId + ", txtAnswer=" + txtAnswer + "]";
-		}
+		return "Option [optionId=" + optionId + ", optionName=" + optionName + "]";
 	}
 
 }

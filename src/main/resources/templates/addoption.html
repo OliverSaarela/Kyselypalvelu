@@ -4,23 +4,21 @@
 	th:href="@{css/bootstrap.min.css}" />
 
 <head>
-<title>Add new answer</title>
+<title>Add new option</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
-	<h2>Add new answer</h2>
+	<h2>Add new question</h2>
 
-	<form action="#" th:action="@{saveanswer}" th:object=${answer} method="post">
+	<form action="#" th:action="@{saveoption}" th:object=${option} method="post">
 
 
-		<label>Answer: </label><input type="text" th:field="${answer.txtAnswer}" /> 
+		<label>Option: </label><input type="text" th:field="${option.optionName}" /> 
 		<label>Question: </label><select th:field="*{question}">
 			<option th:each="question: ${questions}" th:value="${question.questionId}" th:text="${question.questionName}"></option>
-		</select> 
-		
+		</select>
 		<input type="submit" value="Submit"/>
-		
 		
 	</form>
 	<button onClick="history.go(-1)">Return</button>

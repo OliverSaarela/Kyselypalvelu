@@ -17,7 +17,11 @@
 		<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
 		<label>Survey: </label><select th:field="*{survey}">
 			<option th:each="survey: ${surveys}" th:value="${survey.surveyId}" th:text="${survey.surveyName}"></option>
+		</select>
+		<label>Type: </label><select th:field="*{type}">
+			<option th:each="type: ${types}" th:value="${type.typeId}" th:text="${type.typeName}"></option>
 		</select> 
+		<label>Required: </label><input type="checkbox" name="required" th:checked="${question.required}"/>
 		<input type="submit" value="Submit"/>
 		
 	</form>

@@ -81,37 +81,42 @@
 		<strong>JSON Example:</strong>
 	</p>
 	<pre><code>[
+   [
     {
-        "txtAnswer": "jotain",
+        "txtAnswer": "Eka tai null",
         "question": {
             "questionId": 1
-        }
+        },
+        "selectedAnswers": [
+            {
+                "option": {
+                	"optionId": 1
+                }
+            },{
+                "option": {
+                	"optionId": 2
+                }
+            }
+        ]
     },
     {
-        "txtAnswer": "jotainmuuta",
+        "txtAnswer": "Toka tai null",
         "question": {
-            "questionId": 2
-        }
+            "questionId": 1
+        },
+        "selectedAnswers": [
+            {
+                "option": {
+                	"optionId": 1
+                }
+            },{
+                "option": {
+                	"optionId": 2
+                }
+            }
+        ]
     }
-    ,
-    {
-        "txtAnswer": "kolams",
-        "question": {
-            "questionId": 3
-        }
-    },
-    {
-        "txtAnswer": "neljäs",
-        "question": {
-            "questionId": 4
-        }
-    },
-    {
-        "txtAnswer": "viides",
-        "question": {
-            "questionId": 5
-        }
-    }
+    
 ]</code></pre>
 </body>
 </html>

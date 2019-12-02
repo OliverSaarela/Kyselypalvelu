@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit question</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>Edit question</h2>
+	<div>
+	<form action="#" th:action="@{/saveoption}"  th:object= ${option} method="post">
+		<input type="hidden" th:field="${option.optionId}"/>
+		<label>Option: </label><input type="text" th:field="${option.optionName}" /> 
+		<label>Question: </label>
+		<select th:field="*{question}">
+			<option th:each="question: ${questions}" th:value="${question.questionId}" th:text="${question.questionName}">
+		</select>
+		<input type="submit" value="Submit"/>
+
+	</form>
+</div>
+	
+</body>
+</html>

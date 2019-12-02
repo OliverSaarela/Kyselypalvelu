@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Forms</title>
+    <title>Surveys</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -10,6 +10,7 @@
 
 <a href="/addsurvey">Add new survey</a>
 <a href="/addquestion">Add new question</a>
+<a href="/addoption">Add new option</a>
 
 <table style="padding:20px">
 <tr>
@@ -20,7 +21,11 @@
 <tr th:each="survey : ${surveys}">
 	<td th:text=${survey.surveyName}></td>
 	<td th:text=${survey.explanation}></td>
-	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show from</a></td>
+
+	<td><a th:href="@{/survey/{surveyId}(surveyId=${survey.surveyId})}">Show questions</a></td>
+	<td><a th:href="@{/editsurvey/{surveyId}(surveyId=${survey.surveyId})}">Edit</a></td> 
+	<td><a th:href="@{/deletesurvey/{surveyId}(surveyId=${survey.surveyId})}">Delete</a></td>
+
 </tr>
 
 </table>
