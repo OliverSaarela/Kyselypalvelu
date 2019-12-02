@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 public class Question {
 
@@ -30,12 +29,25 @@ public class Question {
 	@JsonIgnore
 	@JoinColumn(name = "surveyId")
 	private Survey survey;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
 	private List<Option> options;
 
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "typeId")
+	private Type type;
+
 	public Question() {
 		super();
+	}
+
+	public Question(String questionName, boolean required, Survey survey, Type type) {
+		super();
+		this.questionName = questionName;
+		this.required = required;
+		this.survey = survey;
+		this.type = type;
 	}
 
 	public Question(String questionName, Survey survey, boolean required) {
@@ -44,19 +56,20 @@ public class Question {
 		this.survey = survey;
 		this.required = required;
 	}
+
 	public Question(String questionName, Survey survey) {
 		super();
 		this.questionName = questionName;
 		this.survey = survey;
-		
+
+	}
+
+	public Type getType() {
+		return type;
 	}
 
 	public boolean isRequired() {
 		return required;
-	}
-
-	public void setRequired(boolean required) {
-		this.required = required;
 	}
 
 	public Long getQuestionId() {
@@ -99,13 +112,22 @@ public class Question {
 		this.options = options;
 	}
 
+	public void setRequired(boolean required) {
+		this.required = required;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
 		if (this.survey != null) {
 			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", survey="
 					+ this.getSurvey() + ", required=" + required + "]";
 		} else {
-			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", required=" + required + "]";
+			return "Question [questionId=" + questionId + ", questionName=" + questionName + ", required=" + required
+					+ "]";
 		}
 	}
 

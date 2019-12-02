@@ -1,7 +1,5 @@
 package hh.swd22.Kyselypalvelu.web;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import hh.swd22.Kyselypalvelu.domain.Question;
 import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
 import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
+import hh.swd22.Kyselypalvelu.domain.TypeRepository;
 
 @CrossOrigin
 @Controller
@@ -25,13 +24,16 @@ public class QuestionController {
 
 	@Autowired
 	private QuestionRepository qRepo;
-
+	
+	@Autowired
+	private TypeRepository tRepo;
 
 	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
 	@GetMapping("/addquestion")
 	public String addNewQuestion(Model model) {
 		model.addAttribute("question", new Question());
 		model.addAttribute("surveys", sRepo.findAll());
+		model.addAttribute("types", tRepo.findAll());
 		return "addquestion";
 	}
 
@@ -48,14 +50,17 @@ public class QuestionController {
 		qRepo.deleteById(questionId);
 		return "redirect:../survey";
 	}
-	
 
-
+	// Muokkaa kysymystä
 	@GetMapping("/editquestion/{id}")
 	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
+		Question question = qRepo.findByquestionId(questionId);
+		boolean required = question.isRequired();
 		
 		model.addAttribute("question", qRepo.findById(questionId));
-		model.addAttribute("survey", sRepo.findAll());
+		model.addAttribute("surveys", sRepo.findAll());
+		model.addAttribute("types", tRepo.findAll());
+		model.addAttribute("required", required);
 		return "editquestion";
 	}
 

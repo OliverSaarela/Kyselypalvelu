@@ -9,13 +9,17 @@
 <h2>Edit question</h2>
 	<div>
 	<form action="#" th:action="@{/savequestion}"  th:object= ${question} method="post">
-	<input type="hidden" th:field="${question.questionId}"/>
-	<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
-	<label>Survey: </label>
-	<select th:field="*{survey}">
-		<option th:each="survey: ${survey}" th:value="${survey.surveyId}" th:text="${survey.surveyName}">
-	</select>
-	<input type="submit" value="Submit"/>
+		<input type="hidden" th:field="${question.questionId}"/>
+		<label>Question: </label><input type="text" th:field="${question.questionName}" /> 
+		<label>Survey: </label>
+		<select th:field="*{survey}">
+			<option th:each="survey: ${surveys}" th:value="${survey.surveyId}" th:text="${survey.surveyName}">
+		</select>
+		<label>Type: </label><select th:field="*{type}">
+			<option th:each="type: ${types}" th:value="${type.typeId}" th:text="${type.typeName}"></option>
+		</select> 
+		<label>Required: </label><input type="checkbox" name="required" th:checked="${required}"/>
+		<input type="submit" value="Submit"/>
 
 	</form>
 </div>

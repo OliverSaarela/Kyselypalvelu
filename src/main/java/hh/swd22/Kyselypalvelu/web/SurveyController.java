@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
@@ -33,10 +32,10 @@ public class SurveyController {
 
 	@Autowired
 	private QuestionRepository questionRepo;
-	
+
 	@Autowired
 	private AnswerRepository answerRepo;
-	
+
 	@Autowired
 	private SelectedAnswerRepository selectedAnswerRepo;
 
@@ -66,15 +65,15 @@ public class SurveyController {
 		SelectedAnswer selectedAnswer = null;
 		for (int i = 0; i < answers.size(); i++) {
 			answer = answers.get(i);
-			
+
 			answerRepo.save(answer);
-			
+
 			for (int j = 0; j < answer.getSelectedAnswers().size(); j++) {
 				selectedAnswer = answer.getSelectedAnswers().get(j);
 				selectedAnswer.setAnswer(answer);
 				selectedAnswerRepo.save(selectedAnswer);
 			}
-		
+
 		}
 		return answers;
 
@@ -112,7 +111,7 @@ public class SurveyController {
 		surveyRepo.save(survey);
 		return "redirect:/survey";
 	}
-	
+
 	// Poistaa kyselyn tietokannasta
 	@GetMapping("/deletesurvey/{id}")
 	public String deleteSurvey(@PathVariable("id") Long surveyId) {
@@ -123,11 +122,8 @@ public class SurveyController {
 	// Muokkaa kyselyä
 	@RequestMapping(value = "/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
-	
 		model.addAttribute("survey", surveyRepo.findById(surveyId));
 		return "editsurvey";
 	}
-	  
-	
+
 }
-	
