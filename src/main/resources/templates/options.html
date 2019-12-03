@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Options</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<h1>Options</h1>
+
+	<table>
+		<tr>
+			<th>Options</th>
+		</tr>
+
+		<tr th:each="option : ${options}">
+			<td th:text=${option.optionName}></td>
+
+			<td><a th:href="@{/editoption/{optionId}(optionId=${option.optionId})}">Edit</a></td>
+			<td><a th:href="@{/deleteoption/{optionId}(optionId=${option.optionId})}">Delete</a></td>
+
+		</tr>
+
+	</table>
+
+	<button onClick="history.go(-1)">Return</button>
+
+</body>
+</html>

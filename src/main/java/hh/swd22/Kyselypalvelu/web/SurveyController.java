@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd22.Kyselypalvelu.domain.Answer;
 import hh.swd22.Kyselypalvelu.domain.AnswerRepository;
-import hh.swd22.Kyselypalvelu.domain.QuestionRepository;
+import hh.swd22.Kyselypalvelu.domain.SelectedAnswer;
+import hh.swd22.Kyselypalvelu.domain.SelectedAnswerRepository;
 import hh.swd22.Kyselypalvelu.domain.Survey;
 import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 
@@ -27,43 +26,64 @@ import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 public class SurveyController {
 
 	@Autowired
-	private SurveyRepository sRepo;
+	private SurveyRepository surveyRepo;
 
 	@Autowired
+
 	private QuestionRepository qRepo;
 
+	private AnswerRepository answerRepo;
+
+
 	@Autowired
-	private AnswerRepository aRepo;
+	private SelectedAnswerRepository selectedAnswerRepo;
 
 	// Kaikki REST-metodit alkaa
 	// Haetaan kaikki kyselyt REST-metodi
 	@GetMapping("/surveys")
 	public @ResponseBody List<Survey> surveyListRest() {
-		return (List<Survey>) sRepo.findAll();
+		return (List<Survey>) surveyRepo.findAll();
 	}
 
 	// Haetaan yhden kyselyn kysymykset REST-metodi
 	@GetMapping("/surveys/{surveyId}")
 	public @ResponseBody Optional<Survey> questionListRest(@PathVariable("surveyId") Long surveyId) {
-		return sRepo.findById(surveyId);
+		return surveyRepo.findById(surveyId);
 	}
 
 	// Haetaan kaikki vastaukset REST-metodi
 	@GetMapping("/answers")
 	public @ResponseBody List<Answer> answersListRest() {
-		return (List<Answer>) aRepo.findAll();
+		return (List<Answer>) answerRepo.findAll();
 	}
 
 	// Tallenna yhden vastauksen
 	@PostMapping("/saveanswers")
-	public @ResponseBody void saveAnswerRest(@RequestBody List<Answer> answers) {
+	public @ResponseBody List<Answer> saveAnswerRest(@RequestBody List<Answer> answers) {
 		Answer answer = null;
+		SelectedAnswer selectedAnswer = null;
 		for (int i = 0; i < answers.size(); i++) {
 			answer = answers.get(i);
-			aRepo.save(answer);
+
+			answerRepo.save(answer);
+
+			for (int j = 0; j < answer.getSelectedAnswers().size(); j++) {
+				selectedAnswer = answer.getSelectedAnswers().get(j);
+				selectedAnswer.setAnswer(answer);
+				selectedAnswerRepo.save(selectedAnswer);
+			}
+
 		}
+		return answers;
 
 	}
+	// Tähän päättyy kaikki rest-metodit
+	//
+	//
+	//
+	//
+	//
+	//
 
 	@GetMapping(value = { "/", "/resthome" })
 	public String getHome() {
@@ -73,15 +93,8 @@ public class SurveyController {
 	// Hakee surveys tietokannasta getSurveys() "/surveys"
 	@GetMapping("/survey")
 	public String getSurveys(Model model) {
-		model.addAttribute("surveys", sRepo.findAll());
+		model.addAttribute("surveys", surveyRepo.findAll());
 		return "surveys";
-	}
-
-	// Hakee kysymykset tietokannasta getQuestions() "/survey/{surveyName}"
-	@GetMapping("/survey/{surveyName}")
-	public String getQuestions(@PathVariable("surveyName") Survey surveyName, Model model) {
-		model.addAttribute("questions", qRepo.findBySurvey(surveyName));
-		return "questions";
 	}
 
 	// Tekee tyhjän surveyn addNewSurvey() "/addsurvey"
@@ -94,18 +107,25 @@ public class SurveyController {
 	// Tallena surveyn tietokantaan saveSurvey() "/savesurvey"
 	@PostMapping("/savesurvey")
 	public String saveSurvey(@ModelAttribute Survey survey) {
-		sRepo.save(survey);
+		surveyRepo.save(survey);
 		return "redirect:/survey";
 	}
 
+
 	@GetMapping("/delete/{id}")
+
+	// Poistaa kyselyn tietokannasta
+	@GetMapping("/deletesurvey/{id}")
+
 	public String deleteSurvey(@PathVariable("id") Long surveyId) {
-		sRepo.deleteById(surveyId);
+		surveyRepo.deleteById(surveyId);
 		return "redirect:../survey";
 	}
 
-	@RequestMapping(value = "/editsurvey/{id}")
+	// Muokkaa kyselyä
+	@GetMapping("/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
+
 
 		model.addAttribute("survey", sRepo.findById(surveyId));
 		sRepo.deleteById(surveyId);
@@ -117,5 +137,11 @@ public class SurveyController {
 		sRepo.save(survey);
 		return "redirect:../survey";
 	}
+
+
+		model.addAttribute("survey", surveyRepo.findById(surveyId));
+		return "editsurvey";
+	}
+
 
 }
