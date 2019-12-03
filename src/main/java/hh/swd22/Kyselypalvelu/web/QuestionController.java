@@ -53,8 +53,6 @@ public class QuestionController {
 	}
 
 
-	@RequestMapping(value = "/editquestion/{id}")
-	public String editQuestion(@PathVariable("id") Long questionId, Model model) {
 
 
 	// Poistaa kysymyksen kyselystä
@@ -77,18 +75,5 @@ public class QuestionController {
 		model.addAttribute("required", required);
 		return "editquestion";
 	}
-
-
-	@RequestMapping(value = "editquestion/save", method = RequestMethod.POST)
-	public String saveEdit(Question question) {
-		qRepo.save(question);
-		return "redirect:../questions";
-	}
-
-//	@GetMapping("/delete/{id}")
-//	public String deleteQuestion(@PathVariable("id") Long questionId) {
-//		qRepo.deleteById(questionId);
-//		return "redirect:../questions";
-//	}
 
 }

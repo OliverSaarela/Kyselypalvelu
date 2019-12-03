@@ -29,11 +29,7 @@ public class SurveyController {
 	private SurveyRepository surveyRepo;
 
 	@Autowired
-
-	private QuestionRepository qRepo;
-
 	private AnswerRepository answerRepo;
-
 
 	@Autowired
 	private SelectedAnswerRepository selectedAnswerRepo;
@@ -111,9 +107,6 @@ public class SurveyController {
 		return "redirect:/survey";
 	}
 
-
-	@GetMapping("/delete/{id}")
-
 	// Poistaa kyselyn tietokannasta
 	@GetMapping("/deletesurvey/{id}")
 
@@ -126,22 +119,9 @@ public class SurveyController {
 	@GetMapping("/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
 
-
-		model.addAttribute("survey", sRepo.findById(surveyId));
-		sRepo.deleteById(surveyId);
-		return "editsurvey";
-	}
-
-	@RequestMapping(value = "editsurvey/save", method = RequestMethod.POST)
-	public String saveEdit(Survey survey) {
-		sRepo.save(survey);
-		return "redirect:../survey";
-	}
-
-
 		model.addAttribute("survey", surveyRepo.findById(surveyId));
+		surveyRepo.deleteById(surveyId);
 		return "editsurvey";
 	}
-
 
 }

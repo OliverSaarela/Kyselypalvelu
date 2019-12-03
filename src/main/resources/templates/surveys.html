@@ -33,10 +33,7 @@
 			<td th:text=${survey.explanation}></td>
 
 
-			<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show
-					form</a></td>
-			<td><a th:href="@{/editsurvey/{id}(id=${survey.surveyId})}">Edit</a></td>
-			<td><a th:href="@{/delete/{id}(id=${survey.surveyId})}">Delete</a></td>
+
 
 	<td><a th:href="@{/survey/{surveyId}(surveyId=${survey.surveyId})}">Show questions</a></td>
 	<td><a th:href="@{/editsurvey/{surveyId}(surveyId=${survey.surveyId})}">Edit</a></td> 
