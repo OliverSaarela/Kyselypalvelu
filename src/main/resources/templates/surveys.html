@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Forms</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Forms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
-<h1>Forms</h1>
+	<h1>Forms</h1>
 
-<a href="/addsurvey">Add new survey</a>
-<a href="/addquestion">Add new question</a>
+	<a href="/addsurvey">Add new survey</a>
+	<a href="/addquestion">Add new question</a>
 
-<table style="padding:20px">
-<tr>
-<th>Surveys</th>
-<th>Explanation</th>
-</tr>
+	<table style="padding: 20px">
+		<tr>
+			<th>Surveys</th>
+			<th>Explanation</th>
+		</tr>
 
-<tr th:each="survey : ${surveys}">
-	<td th:text=${survey.surveyName}></td>
-	<td th:text=${survey.explanation}></td>
+		<tr th:each="survey : ${surveys}">
+			<td th:text=${survey.surveyName}></td>
+			<td th:text=${survey.explanation}></td>
 
-	<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show form</a></td>
-	<td><a th:href="@{/editsurvey/{id}(id=${survey.surveyId})}">Edit</a></td> 
-	<td><a th:href="@{/delete/{id}(id=${survey.surveyId})}">Delete</a></td>
+			<td><a th:href="@{/survey/{id}(id=${survey.surveyId})}">Show
+					form</a></td>
+			<td><a th:href="@{/editsurvey/{id}(id=${survey.surveyId})}">Edit</a></td>
+			<td><a th:href="@{/delete/{id}(id=${survey.surveyId})}">Delete</a></td>
 
-</tr>
+		</tr>
 
-</table>
+	</table>
 
 </body>
 </html>

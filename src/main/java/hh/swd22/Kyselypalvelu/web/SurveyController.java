@@ -31,7 +31,7 @@ public class SurveyController {
 
 	@Autowired
 	private QuestionRepository qRepo;
-	
+
 	@Autowired
 	private AnswerRepository aRepo;
 
@@ -97,7 +97,7 @@ public class SurveyController {
 		sRepo.save(survey);
 		return "redirect:/survey";
 	}
-	
+
 	@GetMapping("/delete/{id}")
 	public String deleteSurvey(@PathVariable("id") Long surveyId) {
 		sRepo.deleteById(surveyId);
@@ -106,17 +106,16 @@ public class SurveyController {
 
 	@RequestMapping(value = "/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
-	
+
 		model.addAttribute("survey", sRepo.findById(surveyId));
 		sRepo.deleteById(surveyId);
 		return "editsurvey";
 	}
-	
+
 	@RequestMapping(value = "editsurvey/save", method = RequestMethod.POST)
-	public String saveEdit(Survey survey){
-	    sRepo.save(survey);
-	    return "redirect:../survey";
-	}   
-	
+	public String saveEdit(Survey survey) {
+		sRepo.save(survey);
+		return "redirect:../survey";
+	}
+
 }
-	

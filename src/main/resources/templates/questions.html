@@ -7,21 +7,20 @@
 <body>
 
 	<h1>Questions</h1>
-	
+
 	<table>
 		<tr>
 			<th>Questions</th>
 		</tr>
-
 		<tr th:each="question : ${questions}">
 			<td th:text=${question.questionName}></td>
-<!-- <td><a th:href="@{/delete/{id}(id=${question.questionId})}">Delete</a></td> -->
-	<td><a th:href="@{/editquestion/{id}(id=${question.questionId})}">Edit</a></td> 
-
+			<!-- <td><a th:href="@{/delete/{id}(id=${question.questionId})}">Delete</a></td> -->
+			<td><a
+				th:href="@{/editquestion/{id}(id=${question.questionId})}">Edit</a></td>
 		</tr>
 
 	</table>
-	
+
 	<button onClick="history.go(-1)">Return</button>
 
 </body>
