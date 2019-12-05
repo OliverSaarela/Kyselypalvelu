@@ -47,12 +47,6 @@ public class SurveyController {
 		return surveyRepo.findById(surveyId);
 	}
 
-	// Haetaan kaikki vastaukset REST-metodi
-	@GetMapping("/answers")
-	public @ResponseBody List<Answer> answersListRest() {
-		return (List<Answer>) answerRepo.findAll();
-	}
-
 	// Tallenna yhden vastauksen
 	@PostMapping("/saveanswers")
 	public @ResponseBody List<Answer> saveAnswerRest(@RequestBody List<Answer> answers) {
