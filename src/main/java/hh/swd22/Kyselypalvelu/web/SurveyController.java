@@ -103,6 +103,7 @@ public class SurveyController {
 
 	// Poistaa kyselyn tietokannasta
 	@GetMapping("/deletesurvey/{id}")
+
 	public String deleteSurvey(@PathVariable("id") Long surveyId) {
 		surveyRepo.deleteById(surveyId);
 		return "redirect:../survey";
@@ -111,7 +112,9 @@ public class SurveyController {
 	// Muokkaa kyselyä
 	@GetMapping("/editsurvey/{id}")
 	public String editSurvey(@PathVariable("id") Long surveyId, Model model) {
+
 		model.addAttribute("survey", surveyRepo.findById(surveyId));
+		surveyRepo.deleteById(surveyId);
 		return "editsurvey";
 	}
 
