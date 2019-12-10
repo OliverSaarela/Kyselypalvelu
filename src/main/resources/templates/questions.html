@@ -15,11 +15,6 @@
 		</tr>
 		<tr th:each="question : ${questions}">
 			<td th:text=${question.questionName}></td>
-
-
-
-
-
 			<td><a th:href="@{/survey/{surveyId}/{questionId} (surveyId=${question.survey.surveyId}, questionId=${question.questionId})}">Show options</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editquestion/{questionId}(questionId=${question.questionId})}">Edit</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletequestion/{questionId}(quesitonId=${question.questionId})}">Delete</a></td>
