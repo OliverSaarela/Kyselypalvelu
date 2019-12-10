@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Option {
@@ -27,6 +28,7 @@ public class Option {
 	private Question question;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "option")
+	@JsonIgnore
 	private List<SelectedAnswer> selectedAnswers;
 
 	public Option() {

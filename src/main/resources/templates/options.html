@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>Options</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,8 +17,8 @@
 		<tr th:each="option : ${options}">
 			<td th:text=${option.optionName}></td>
 
-			<td><a th:href="@{/editoption/{optionId}(optionId=${option.optionId})}">Edit</a></td>
-			<td><a th:href="@{/deleteoption/{optionId}(optionId=${option.optionId})}">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editoption/{optionId}(optionId=${option.optionId})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteoption/{optionId}(optionId=${option.optionId})}">Delete</a></td>
 
 		</tr>
 
