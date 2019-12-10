@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
-<title>Forms</title>
+<title>Surveys</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <title>Surveys</title>
@@ -11,15 +12,13 @@
 </head>
 <body>
 
-	<h1>Forms</h1>
+	<h1>Surveys</h1>
 
 
-	<a href="/addsurvey">Add new survey</a>
-	<a href="/addquestion">Add new question</a>
 
-<a href="/addsurvey">Add new survey</a>
-<a href="/addquestion">Add new question</a>
-<a href="/addoption">Add new option</a>
+<a  sec:authorize="hasAuthority('ADMIN')" href="/addsurvey">Add new survey</a>
+<a sec:authorize="hasAuthority('ADMIN')" href="/addquestion">Add new question</a>
+<a sec:authorize="hasAuthority('ADMIN')" href="/addoption">Add new option</a>
 
 
 	<table style="padding: 20px">
@@ -36,8 +35,8 @@
 
 
 	<td><a th:href="@{/survey/{surveyId}(surveyId=${survey.surveyId})}">Show questions</a></td>
-	<td><a th:href="@{/editsurvey/{surveyId}(surveyId=${survey.surveyId})}">Edit</a></td> 
-	<td><a th:href="@{/deletesurvey/{surveyId}(surveyId=${survey.surveyId})}">Delete</a></td>
+	<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editsurvey/{surveyId}(surveyId=${survey.surveyId})}">Edit</a></td> 
+	<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletesurvey/{surveyId}(surveyId=${survey.surveyId})}">Delete</a></td>
 
 
 		</tr>

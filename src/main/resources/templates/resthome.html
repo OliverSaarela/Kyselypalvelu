@@ -6,7 +6,12 @@
 </head>
 <body>
 	<h1>REST Home Page</h1>
-
+	<div>
+	 <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+	</div>
+	
 	<h2>All Surveys</h2>
 	<p>
 		<strong>Method:</strong> GET <strong>Endpoint:</strong> <strong><a

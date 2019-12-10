@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>Questions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -20,8 +21,8 @@
 
 
 			<td><a th:href="@{/survey/{surveyId}/{questionId} (surveyId=${question.survey.surveyId}, questionId=${question.questionId})}">Show options</a></td>
-			<td><a th:href="@{/editquestion/{questionId}(questionId=${question.questionId})}">Edit</a></td>
-			<td><a th:href="@{/deletequestion/{questionId}(quesitonId=${question.questionId})}">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editquestion/{questionId}(questionId=${question.questionId})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletequestion/{questionId}(quesitonId=${question.questionId})}">Delete</a></td>
 
 
 		</tr>
