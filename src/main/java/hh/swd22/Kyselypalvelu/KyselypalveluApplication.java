@@ -16,6 +16,8 @@ import hh.swd22.Kyselypalvelu.domain.Survey;
 import hh.swd22.Kyselypalvelu.domain.SurveyRepository;
 import hh.swd22.Kyselypalvelu.domain.Type;
 import hh.swd22.Kyselypalvelu.domain.TypeRepository;
+import hh.swd22.Kyselypalvelu.domain.User;
+import hh.swd22.Kyselypalvelu.domain.UserRepository;
 
 @SpringBootApplication
 public class KyselypalveluApplication {
@@ -28,7 +30,7 @@ public class KyselypalveluApplication {
 
 	@Bean
 	public CommandLineRunner formDemo(QuestionRepository qRepo, SurveyRepository sRepo, AnswerRepository aRepo,
-			OptionRepository oRepo, TypeRepository tRepo) {
+			OptionRepository oRepo, TypeRepository tRepo, UserRepository userrepository) {
 		return (args) -> {
 			log.info("Testi");
 
@@ -121,7 +123,16 @@ public class KyselypalveluApplication {
 			qRepo.save(new Question("Avoin palaute kansainvälisyyspalveluista ja tiedon saatavuudesta MyNetissä", false,
 					sRepo.findBySurveyName("Käyttäjäkysely Haaga-Helian kansainvälisyyspalveluista").get(0),
 					tRepo.findByTypeName("text").get(0)));
+			
+			
+		User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+		User user2 = new User("aitog", "$2a$04$KNLUwOWHVQZVpXyMBNc7JOzbLiBjb9Tk9bP7KNcPI12ICuvzXQQKG", "ADMIN");
+		userrepository.save(user1);
+		userrepository.save(user2);
 		};
+		
+		
+		
 
 	};
 

@@ -35,6 +35,7 @@ public class QuestionController {
 		return "questions";
 	}
 
+
 	// Tekee tyhjän kysymyksen addNewQuestion() "/addquestion"
 	@GetMapping("/addquestion")
 	public String addNewQuestion(Model model) {
@@ -51,6 +52,9 @@ public class QuestionController {
 		return "redirect:/survey";
 	}
 
+
+
+
 	// Poistaa kysymyksen kyselystä
 	@GetMapping("/deletequestion/{questionId}")
 	public String deleteQuestion(@PathVariable("questionId") Long questionId) {
@@ -64,6 +68,7 @@ public class QuestionController {
 		Question question = qRepo.findByquestionId(questionId);
 		boolean required = question.isRequired();
 		
+
 		model.addAttribute("question", qRepo.findById(questionId));
 		model.addAttribute("surveys", sRepo.findAll());
 		model.addAttribute("types", tRepo.findAll());
